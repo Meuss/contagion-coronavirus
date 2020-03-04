@@ -1,35 +1,38 @@
 <template>
   <div id="app">
-    <h1>Coronavirus cases in Switzerland</h1>
+    <h2>Contagion</h2>
+    <h1>Coronavirus in Switzerland</h1>
     <Data />
-    <SvgElement />
     <div>Source: FOPH</div>
   </div>
 </template>
 
 <script>
 import Data from "./components/Data.vue";
-import SvgElement from "./components/SvgElement.vue";
 
 export default {
   name: "App",
   components: {
-    Data,
-    SvgElement
+    Data
   }
 };
 </script>
 
 <style lang="scss">
+html {
+  height: 100%;
+}
+body {
+  min-height: 100%;
+  background-color: #edf2f4;
+  margin: 0;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-h1 {
-  margin: 40px 0 0;
+  color: #2b2d42;
+  padding-top: 60px;
 }
 </style>
