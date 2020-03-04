@@ -4,7 +4,10 @@
     <h1>Coronavirus in Switzerland</h1>
     <Data />
     <footer>
-      <p>Source: FOPH, Cantons</p>
+      <p>
+        Source: FOPH, Cantons.
+      </p>
+      <p><i>Last updated: 04.03.2020 13:27</i></p>
       <a href="https://github.com/Meuss/contagion-coronavirus" class="github">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path
@@ -35,7 +38,6 @@ body {
   min-height: 100%;
   background-color: #edf2f4;
   margin: 0;
-  overflow: hidden;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -48,31 +50,27 @@ body {
 h1 {
   font-size: 1.5em;
   margin-top: 0;
-  // font-weight: normal;
 }
 h2 {
   margin: 0;
 }
-.github {
-  padding: 10px 0px;
-  bottom: -40px;
-  right: -60px;
-  position: absolute;
-  background: #2b2d42;
-  color: black;
-  box-shadow: -1px -1px 20px 0px rgba(0, 0, 0, 0.3);
-  display: inline-block;
-  width: 150px;
-  height: 80px;
-  transform: rotate(-45deg);
-  transform-origin: 50% 50%;
-  transition: 0.15s ease-out;
+footer {
+  padding-right: 20px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: flex-end;
+  p {
+    margin: 0;
+    i {
+      font-size: 12px;
+    }
+  }
 }
 .github svg {
-  transform: rotate(45deg);
-  fill: white;
+  margin-top: 5px;
   height: 25px;
+  path {
+    fill: #2b2d42;
+  }
 }
 </style>
