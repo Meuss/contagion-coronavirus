@@ -332,7 +332,7 @@
 <script>
 export default {
   name: "SvgElement",
-  props: ["contagions", "totalCases"],
+  props: ["contagions", "totalcases"],
   mounted() {
     this.infectionSizes();
   },
@@ -351,8 +351,8 @@ export default {
       circles.forEach(circle => {
         const key = circle.id;
         const values = this.contagions.find(x => x.name === key);
+        const pulse = document.querySelector(`.${key}.pulse`);
         if (values) {
-          const pulse = document.querySelector(`.${key}.pulse`);
           const x = values.cases;
           if (x == 1) {
             circle.r.baseVal.value = 4;
@@ -370,8 +370,16 @@ export default {
             circle.r.baseVal.value = 20;
             pulse.r.baseVal.value = 20;
           }
+        } else {
+          circle.r.baseVal.value = 0;
+          pulse.r.baseVal.value = 0;
         }
       });
+    }
+  },
+  watch: {
+    contagions: function() {
+      this.infectionSizes();
     }
   }
 };

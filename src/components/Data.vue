@@ -1,22 +1,41 @@
 <template>
   <div>
     <p class="active">
-      Active cases: <strong>{{ totalCases }}</strong>
+      known infections:
+      <strong>{{ totalCases }}</strong>
     </p>
-    <SvgElement :contagions="contagions" :totalCases="totalCases" />
+    <div class="choose-date">
+      <p>Date:</p>
+      <Datepicker
+        :disabled-dates="disabledDates"
+        :format="customFormatter"
+        @selected="changeDate"
+        monday-first
+      />
+    </div>
+    <SvgElement :contagions="contagions" :totalcases="totalCases" />
   </div>
 </template>
 
 <script>
-import contagionsData from "../assets/data-lR5wn.csv";
+import Datepicker from "vuejs-datepicker";
+import moment from "moment";
+import data from "../assets/data/data.js";
 import SvgElement from "./SvgElement.vue";
 export default {
   name: "Data",
   components: {
-    SvgElement
+    SvgElement,
+    Datepicker
   },
   data() {
     return {
+      disabledDates: {
+        to: new Date(2020, 1, 25), // Disable all dates up to specific date
+        // from: new Date() // Disable all dates after specific date
+        from: new Date(2020, 2, 5) // Disable all dates after specific date
+      },
+      data,
       contagions: [],
       totalCases: 0,
       cantons: [
@@ -50,25 +69,35 @@ export default {
     };
   },
   created() {
-    this.loadData();
+    this.loadData(`data_${moment(new Date()).format("MMDD")}`);
   },
   methods: {
-    loadData() {
+    loadData(x) {
       this.totalCases = 0;
       this.contagions = [];
       // process data from csv, create an array of cases objects per canton
-      contagionsData.forEach(element => {
-        const obj = {};
-        obj["name"] = this.cantons.find(
-          ({ name }) => name === element.Titel
-        ).short;
-        obj["cases"] = element.Cases;
-        this.contagions.push(obj);
-      });
-      // total cases
-      this.contagions.forEach(element => {
-        this.totalCases += element["cases"];
-      });
+      if (this.data.days[x] !== undefined) {
+        this.data.days[x].forEach(element => {
+          const obj = {};
+          obj["name"] = this.cantons.find(
+            ({ name }) => name === element.Titel
+          ).short;
+          obj["cases"] = element.Cases;
+          this.contagions.push(obj);
+        });
+        // total cases
+        this.contagions.forEach(element => {
+          this.totalCases += element["cases"];
+        });
+      } else {
+        console.error("data not found");
+      }
+    },
+    customFormatter(date) {
+      return moment(date).format("DD.MM.YYYY");
+    },
+    changeDate(x) {
+      this.loadData(`data_${moment(x).format("MMDD")}`);
     }
   }
 };
@@ -76,9 +105,16 @@ export default {
 
 <style scoped lang="scss">
 .active {
-  font-size: 1.6em;
+  font-size: 1.4em;
+  margin-bottom: 0;
   strong {
+    font-size: 1.6em;
     color: #ef233c;
   }
+}
+.choose-date {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
