@@ -220,6 +220,190 @@
       <circle id="GE" cx="55" cy="540" r="0" />
       <circle id="JU" cx="300" cy="160" r="0" />
     </g>
+    <g id="pulses">
+      <circle
+        class="BE pulse"
+        cx="398"
+        cy="344"
+        r="0"
+        transform-origin="398 344"
+      />
+      <circle
+        class="ZH pulse"
+        cx="616"
+        cy="136"
+        r="0"
+        transform-origin="616 136"
+      />
+      <circle
+        class="LU pulse"
+        cx="499"
+        cy="262"
+        r="0"
+        transform-origin="499 262"
+      />
+      <circle
+        class="UR pulse"
+        cx="619"
+        cy="350"
+        r="0"
+        transform-origin="619 350"
+      />
+      <circle
+        class="SZ pulse"
+        cx="649"
+        cy="272"
+        r="0"
+        transform-origin="649 272"
+      />
+      <circle
+        class="OW pulse"
+        cx="535"
+        cy="330"
+        r="0"
+        transform-origin="535 330"
+      />
+      <circle
+        class="NW pulse"
+        cx="580"
+        cy="300"
+        r="0"
+        transform-origin="580 300"
+      />
+      <circle
+        class="GL pulse"
+        cx="725"
+        cy="290"
+        r="0"
+        transform-origin="725 290"
+      />
+      <circle
+        class="ZG pulse"
+        cx="610"
+        cy="229"
+        r="0"
+        transform-origin="610 229"
+      />
+      <circle
+        class="FR pulse"
+        cx="281"
+        cy="387"
+        r="0"
+        transform-origin="281 387"
+      />
+      <circle
+        class="SO pulse"
+        cx="418"
+        cy="175"
+        r="0"
+        transform-origin="418 175"
+      />
+      <circle
+        class="BS pulse"
+        cx="405"
+        cy="90"
+        r="0"
+        transform-origin="405 90"
+      />
+      <circle
+        class="BL pulse"
+        cx="395"
+        cy="118"
+        r="0"
+        transform-origin="395 118"
+      />
+      <circle
+        class="SH pulse"
+        cx="615"
+        cy="40"
+        r="0"
+        transform-origin="615 40"
+      />
+      <circle
+        class="AR pulse"
+        cx="768"
+        cy="165"
+        r="0"
+        transform-origin="768 165"
+      />
+      <circle
+        class="AI pulse"
+        cx="795"
+        cy="180"
+        r="0"
+        transform-origin="795 180"
+      />
+      <circle
+        class="SG pulse"
+        cx="740"
+        cy="210"
+        r="0"
+        transform-origin="740 210"
+      />
+      <circle
+        class="GR pulse"
+        cx="839"
+        cy="391"
+        r="0"
+        transform-origin="839 391"
+      />
+      <circle
+        class="AG pulse"
+        cx="516"
+        cy="134"
+        r="0"
+        transform-origin="516 134"
+      />
+      <circle
+        class="TG pulse"
+        cx="719"
+        cy="87"
+        r="0"
+        transform-origin="719 87"
+      />
+      <circle
+        class="TI pulse"
+        cx="663"
+        cy="501"
+        r="0"
+        transform-origin="663 501"
+      />
+      <circle
+        class="VD pulse"
+        cx="156"
+        cy="401"
+        r="0"
+        transform-origin="156 401"
+      />
+      <circle
+        class="VS pulse"
+        cx="392"
+        cy="549"
+        r="0"
+        transform-origin="392 549"
+      />
+      <circle
+        class="NE pulse"
+        cx="204"
+        cy="278"
+        r="0"
+        transform-origin="204 278"
+      />
+      <circle
+        class="GE pulse"
+        cx="55"
+        cy="540"
+        r="0"
+        transform-origin="55 540"
+      />
+      <circle
+        class="JU pulse"
+        cx="300"
+        cy="160"
+        r="0"
+        transform-origin="300 160"
+      />
+    </g>
   </svg>
 </template>
 
@@ -237,17 +421,23 @@ export default {
         const key = circle.id;
         const values = this.contagions.find(x => x.name === key);
         if (values) {
+          const pulse = document.querySelector(`.${key}.pulse`);
           const x = values.cases;
           if (x == 1) {
             circle.r.baseVal.value = 4;
+            pulse.r.baseVal.value = 4;
           } else if (x == 2) {
             circle.r.baseVal.value = 7;
+            pulse.r.baseVal.value = 7;
           } else if (x > 2 && x <= 5) {
             circle.r.baseVal.value = 10;
+            pulse.r.baseVal.value = 10;
           } else if (x > 5 && x < 10) {
             circle.r.baseVal.value = 13;
+            pulse.r.baseVal.value = 13;
           } else if (x > 10) {
             circle.r.baseVal.value = 20;
+            pulse.r.baseVal.value = 20;
           }
         }
       });
@@ -264,7 +454,7 @@ svg {
 }
 
 #cantons_paths {
-  fill: #8d99ae;
+  fill: #cfd6e2;
   fill-opacity: 1;
   stroke: #333;
   stroke-width: 0.5;
@@ -278,5 +468,23 @@ svg {
 }
 circle {
   fill: #ef233c;
+}
+
+.pulse {
+  fill: #ef233c;
+  animation-duration: 1s;
+  animation-name: pulse;
+  animation-iteration-count: infinite;
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(1.3);
+    opacity: 0;
+  }
 }
 </style>
