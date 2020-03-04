@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>
+    <p class="active">
       Active cases: <strong>{{ totalCases }}</strong>
     </p>
     <SvgElement :contagions="contagions" :totalCases="totalCases" />
@@ -74,4 +74,11 @@ export default {
 };
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.active {
+  font-size: 1.6em;
+  strong {
+    color: #ef233c;
+  }
+}
+</style>

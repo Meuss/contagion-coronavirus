@@ -476,6 +476,11 @@ circle {
   animation-name: pulse;
   animation-iteration-count: infinite;
 }
+@for $i from 1 through 26 {
+  .pulse:nth-child(#{$i}n) {
+    animation-delay: #{$i * 0.1}s;
+  }
+}
 
 @keyframes pulse {
   from {
@@ -483,7 +488,7 @@ circle {
     opacity: 1;
   }
   to {
-    transform: scale(1.3);
+    transform: scale(1.5);
     opacity: 0;
   }
 }
