@@ -1,7 +1,7 @@
 <template>
   <div>
     <p class="active">
-      known infections:
+      Cases:
       <strong>{{ totalCases }}</strong>
     </p>
     <div class="choose-date">
@@ -33,7 +33,7 @@ export default {
       disabledDates: {
         to: new Date(2020, 1, 25), // Disable all dates up to specific date
         // from: new Date() // Disable all dates after specific date
-        from: new Date(2020, 2, 5) // Disable all dates after specific date
+        from: new Date() // Disable all dates after specific date
       },
       data,
       contagions: [],

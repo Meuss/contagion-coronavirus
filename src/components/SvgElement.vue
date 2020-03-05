@@ -334,19 +334,25 @@ export default {
   name: "SvgElement",
   props: ["contagions", "totalcases"],
   mounted() {
-    this.infectionSizes();
+    this.setInfections();
+    this.clearCantons();
   },
   methods: {
     asyncMethod(key) {
       if (this.contagions.find(x => x.name === key) !== undefined) {
-        return `${key}: ${
+        return `${key}: <strong>${
           this.contagions.find(x => x.name === key).cases
-        } infected`;
+        }</strong> cases`;
       } else {
-        return `${key}: virus free!`;
+        return `${key}: <strong>0</strong> cases`;
       }
     },
-    infectionSizes() {
+    setInfections() {
+      if (document.querySelectorAll(".additional").length) {
+        document
+          .querySelectorAll(".additional")
+          .forEach(e => e.parentNode.removeChild(e));
+      }
       const circles = document.querySelectorAll("#circles circle");
       circles.forEach(circle => {
         const key = circle.id;
@@ -363,23 +369,74 @@ export default {
           } else if (x > 2 && x <= 5) {
             circle.r.baseVal.value = 10;
             pulse.r.baseVal.value = 10;
-          } else if (x > 5 && x < 10) {
-            circle.r.baseVal.value = 13;
-            pulse.r.baseVal.value = 13;
-          } else if (x > 10) {
+          } else if (x > 5 && x <= 10) {
+            circle.r.baseVal.value = 15;
+            pulse.r.baseVal.value = 15;
+          } else if (x > 10 && x <= 20) {
             circle.r.baseVal.value = 20;
             pulse.r.baseVal.value = 20;
+          } else if (x > 20) {
+            circle.r.baseVal.value = 20;
+            pulse.r.baseVal.value = 20;
+            // create new circle
+            const additionalCircle = document.createElementNS(
+              "http://www.w3.org/2000/svg",
+              "circle"
+            );
+            const randomX = Math.floor(Math.random() * 30) + 5;
+            const randomY = Math.floor(Math.random() * 30) + 5;
+            additionalCircle.setAttribute(
+              "cx",
+              circle.cx.baseVal.value + randomX
+            );
+            additionalCircle.setAttribute(
+              "cy",
+              circle.cy.baseVal.value + randomY
+            );
+            additionalCircle.setAttribute("r", "10");
+            additionalCircle.setAttribute("fill", "#ef233c");
+            additionalCircle.setAttribute("class", "additional");
+            document.querySelector("#circles").appendChild(additionalCircle);
+            // create new pulse
+            const additionalPulse = document.createElementNS(
+              "http://www.w3.org/2000/svg",
+              "circle"
+            );
+            additionalPulse.setAttribute(
+              "cx",
+              circle.cx.baseVal.value + randomX
+            );
+            additionalPulse.setAttribute(
+              "cy",
+              circle.cy.baseVal.value + randomY
+            );
+            additionalPulse.setAttribute("r", "10");
+            additionalPulse.setAttribute("fill", "#ef233c");
+            additionalPulse.setAttribute("class", "pulse additional");
+            document.querySelector("#pulses").appendChild(additionalPulse);
           }
         } else {
           circle.r.baseVal.value = 0;
           pulse.r.baseVal.value = 0;
         }
       });
+    },
+    clearCantons() {
+      const cantons = document.querySelectorAll("#cantons_paths path");
+      cantons.forEach(canton => {
+        canton.classList.remove("cleared");
+        const key = canton.classList[0];
+        const found = this.contagions.find(x => x.name === key);
+        if (!found) {
+          canton.classList.add("cleared");
+        }
+      });
     }
   },
   watch: {
     contagions: function() {
-      this.infectionSizes();
+      this.setInfections();
+      this.clearCantons();
     }
   }
 };
@@ -404,6 +461,12 @@ svg {
     &:hover {
       fill: #a2adbf;
     }
+    &.cleared {
+      fill: #dce1e8;
+      &:hover {
+        fill: #cfd6e2;
+      }
+    }
   }
 }
 
@@ -416,30 +479,5 @@ svg {
 circle {
   fill: #ef233c;
   pointer-events: none;
-}
-
-.pulse {
-  fill: #ef233c;
-  animation-duration: 1s;
-  animation-name: pulse;
-  animation-iteration-count: infinite;
-  transform-box: fill-box;
-  transform-origin: center;
-}
-@for $i from 1 through 26 {
-  .pulse:nth-child(#{$i}n) {
-    animation-delay: #{$i * 0.1}s;
-  }
-}
-
-@keyframes pulse {
-  from {
-    transform: scale(1);
-    opacity: 1;
-  }
-  to {
-    transform: scale(1.5);
-    opacity: 0;
-  }
 }
 </style>

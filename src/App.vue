@@ -1,11 +1,17 @@
 <template>
   <div id="app">
     <h2>Contagion</h2>
-    <h1>of the Coronavirus in Switzerland</h1>
+    <h1>Coronavirus in Switzerland</h1>
     <Data />
     <footer>
       <p>
         Source: FOPH, swissinfo.ch.
+      </p>
+      <p>
+        <i
+          >Includes positive test results by the cantons that have yet to be
+          confirmed by Geneva.</i
+        >
       </p>
       <p>
         <i>Last updated: {{ timestamp }}</i>
@@ -37,7 +43,7 @@ export default {
   mounted() {
     this.timestamp = moment(
       document.documentElement.dataset.buildTimestampUtc
-    ).format("DD.MM.YYYY hh:mm:ss");
+    ).fromNow();
   }
 };
 </script>
@@ -67,6 +73,30 @@ h1 {
 h2 {
   margin: 0;
 }
+.pulse {
+  fill: #ef233c;
+  animation-duration: 1s;
+  animation-name: pulse;
+  animation-iteration-count: infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+@for $i from 1 through 40 {
+  .pulse:nth-child(#{$i}n) {
+    animation-delay: #{$i * 0.1}s;
+  }
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(1.7);
+    opacity: 0;
+  }
+}
 footer {
   padding-right: 20px;
   display: flex;
@@ -87,10 +117,11 @@ footer {
   }
 }
 .tooltip .tooltip-inner {
-  background: #2b2d42;
+  box-shadow: 0px 2px 5px #2b2d42;
+  background: #f9f9f9;
   font-family: Avenir, Helvetica, Arial, sans-serif;
-  color: white;
-  border-radius: 16px;
+  color: #2b2d42;
+  border-radius: 6px;
   padding: 5px 10px 4px;
 }
 
@@ -100,7 +131,7 @@ footer {
   border-style: solid;
   position: absolute;
   margin: 5px;
-  border-color: black;
+  border-color: #f9f9f9;
   z-index: 1;
 }
 
@@ -146,6 +177,7 @@ footer {
     font-size: 14px;
     font-weight: bold;
     text-align: center;
+    outline: transparent;
   }
 }
 </style>
