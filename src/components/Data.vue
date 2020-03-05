@@ -14,18 +14,21 @@
       />
     </div>
     <SvgElement :contagions="contagions" :totalcases="totalCases" />
+    <Chart :chartcontagions="chartcontagions" />
   </div>
 </template>
 
 <script>
 import Datepicker from "vuejs-datepicker";
 import moment from "moment";
-import data from "../assets/data/data.js";
+import data from "../assets/data.js";
 import SvgElement from "./SvgElement.vue";
+import Chart from "./Chart.vue";
 export default {
   name: "Data",
   components: {
     SvgElement,
+    Chart,
     Datepicker
   },
   data() {
@@ -37,6 +40,7 @@ export default {
       },
       data,
       contagions: [],
+      chartcontagions: [],
       totalCases: 0,
       cantons: [
         { name: "Zurich", short: "ZH" },
@@ -70,8 +74,24 @@ export default {
   },
   created() {
     this.loadData(`data_${moment(new Date()).format("MMDD")}`);
+    this.loadChartData();
   },
   methods: {
+    loadChartData() {
+      Object.entries(this.data.days).forEach(([key, val]) => {
+        const obj = {};
+        let dayTotal = 0;
+        // "0225"
+        const str = key.replace("data_", "");
+        const str2 = [str.slice(0, 2), ".", str.slice(2, 4), ".2020"].join("");
+        obj["date"] = str2;
+        val.forEach(function(element) {
+          dayTotal += element["Cases"];
+        });
+        obj["total"] = dayTotal;
+        this.chartcontagions.push(obj);
+      });
+    },
     loadData(x) {
       this.totalCases = 0;
       this.contagions = [];
