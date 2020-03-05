@@ -64,7 +64,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2b2d42;
-  padding-top: 60px;
+  padding: 40px 20px 10px 20px;
+  @media (max-width: 500px) {
+    padding: 30px 10px 10px 10px;
+  }
 }
 h1 {
   font-size: 1.5em;
@@ -98,7 +101,6 @@ h2 {
   }
 }
 footer {
-  padding-right: 20px;
   display: flex;
   flex-direction: column;
   align-items: flex-end;

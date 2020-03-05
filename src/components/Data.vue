@@ -107,6 +107,7 @@ export default {
 .active {
   font-size: 1.4em;
   margin-bottom: 0;
+  margin-top: 0;
   strong {
     font-size: 1.6em;
     color: #ef233c;
