@@ -41,7 +41,7 @@ export default {
       cantons: [
         { name: "Zurich", short: "ZH" },
         { name: "Bern", short: "BE" },
-        { name: "Luzern", short: "LU" },
+        { name: "Lucerne", short: "LU" },
         { name: "Uri", short: "UR" },
         { name: "Schwyz", short: "SZ" },
         { name: "Obwalden", short: "OW" },
@@ -83,6 +83,7 @@ export default {
             ({ name }) => name === element.Titel
           ).short;
           obj["cases"] = element.Cases;
+          obj["deaths"] = element.Deaths;
           this.contagions.push(obj);
         });
         // total cases

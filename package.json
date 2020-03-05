@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "apexcharts": "^3.16.0",
     "core-js": "^3.6.4",
     "csv-loader": "^3.0.2",
     "moment": "^2.24.0",

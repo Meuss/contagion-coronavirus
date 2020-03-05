@@ -112,6 +112,14 @@ footer {
     }
   }
 }
+.svg-wrapper {
+  position: relative;
+}
+.death-div {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+}
 .github svg {
   margin-top: 5px;
   height: 25px;
