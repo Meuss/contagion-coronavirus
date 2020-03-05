@@ -117,7 +117,18 @@ export default {
           this.totalCases += element["cases"];
         });
       } else {
-        console.error("data not found");
+        // unavailable: get last day with data
+        let i = 0;
+        Object.entries(this.data.days).forEach(([key]) => {
+          const keyString = [
+            key.replace("data_", "").slice(0, 2),
+            key.replace("data_", "").slice(2, 4)
+          ].join("");
+          if (i < parseInt(keyString)) {
+            i = keyString;
+          }
+        });
+        this.loadData(`data_${i}`);
       }
     },
     customFormatter(date) {
