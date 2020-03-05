@@ -21,6 +21,9 @@ export default {
             enabled: false
           }
         },
+        dataLabels: {
+          enabled: true
+        },
         colors: ["#ef233c"],
         xaxis: {
           categories: ["1", "asdf", "234"]

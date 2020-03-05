@@ -362,10 +362,11 @@ export default {
           .querySelectorAll(".additional")
           .forEach(e => e.parentNode.removeChild(e));
       }
+      const deaths = document.querySelectorAll(".skull");
+      deaths.forEach(element => {
+        element.remove();
+      });
       const circles = document.querySelectorAll("#circles circle");
-      document
-        .querySelectorAll("#cantons_paths .dead-inside")
-        .forEach(e => e.classList.remove("dead-inside"));
       circles.forEach(circle => {
         this.setDeath(circle);
         const key = circle.id;
@@ -437,9 +438,17 @@ export default {
     setDeath(circle) {
       if (this.contagions.find(x => x.name === circle.id) !== undefined) {
         if (this.contagions.find(x => x.name === circle.id).deaths > 0) {
-          document
-            .querySelector(`#cantons_paths .${circle.id}`)
-            .classList.add("dead-inside");
+          const deathImg = document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "image"
+          );
+          deathImg.setAttribute("x", circle.cx.baseVal.value - 12);
+          deathImg.setAttribute("y", circle.cy.baseVal.value - 12);
+          deathImg.setAttribute("width", 25);
+          deathImg.setAttribute("height", 25);
+          deathImg.setAttribute("href", "skull.svg");
+          deathImg.setAttribute("class", "skull");
+          document.querySelector("#swiss_map").appendChild(deathImg);
         }
       }
     },
@@ -485,12 +494,6 @@ svg {
     }
     &.cleared {
       fill: #dce1e8;
-      &:hover {
-        fill: #a2adbf;
-      }
-    }
-    &.dead-inside {
-      fill: #e1cfda;
       &:hover {
         fill: #a2adbf;
       }

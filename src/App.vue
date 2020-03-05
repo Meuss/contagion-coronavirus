@@ -84,6 +84,9 @@ h2 {
   transform-box: fill-box;
   transform-origin: center;
 }
+.skull {
+  pointer-events: none;
+}
 @for $i from 1 through 40 {
   .pulse:nth-child(#{$i}n) {
     animation-delay: #{$i * 0.1}s;
