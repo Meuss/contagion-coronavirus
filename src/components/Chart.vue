@@ -13,9 +13,12 @@ export default {
       options: {
         chart: {
           id: "total-cases",
-          width: "100%",
+          fontFamily: "Avenir, Helvetica, Arial, sans-serif",
           toolbar: {
             show: false
+          },
+          zoom: {
+            enabled: false
           }
         },
         colors: ["#ef233c"],
@@ -56,7 +59,7 @@ export default {
 
 <style lang="scss" scoped>
 .chart-wrapper {
-  display: flex;
-  justify-content: center;
+  max-width: 500px;
+  margin: 0 auto;
 }
 </style>
