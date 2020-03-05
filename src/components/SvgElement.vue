@@ -436,6 +436,7 @@ export default {
       });
     },
     setDeath(circle) {
+      // TODO: multiple circles per canton will break this
       if (this.contagions.find(x => x.name === circle.id) !== undefined) {
         if (this.contagions.find(x => x.name === circle.id).deaths > 0) {
           const deathImg = document.createElementNS(

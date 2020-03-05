@@ -5,7 +5,7 @@
     <Data />
     <footer>
       <p>
-        Source: FOPH, swissinfo.ch
+        <i>Source: FOPH, swissinfo.ch</i>
       </p>
       <p>
         <i

@@ -77,18 +77,24 @@ export default {
     this.loadChartData();
   },
   methods: {
+    // prepare data for the Chart component
     loadChartData() {
       Object.entries(this.data.days).forEach(([key, val]) => {
         const obj = {};
+        // format the dates
+        const dateString = [
+          key.replace("data_", "").slice(2, 4),
+          ".",
+          key.replace("data_", "").slice(0, 2)
+        ].join("");
+        obj["date"] = dateString;
+        // prepare the totals
         let dayTotal = 0;
-        // "0225"
-        const str = key.replace("data_", "");
-        const str2 = [str.slice(2, 4), ".", str.slice(0, 2)].join("");
-        obj["date"] = str2;
         val.forEach(function(element) {
           dayTotal += element["Cases"];
         });
         obj["total"] = dayTotal;
+        // push dates + totals
         this.chartcontagions.push(obj);
       });
     },
