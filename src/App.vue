@@ -5,7 +5,7 @@
     <Data />
     <footer>
       <p>
-        Source: FOPH, swissinfo.ch.
+        Source: FOPH, swissinfo.ch
       </p>
       <p>
         <i
@@ -104,6 +104,7 @@ footer {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  text-align: right;
   p {
     margin: 0;
     i {
