@@ -1,11 +1,6 @@
 <template>
   <div class="chart-wrapper">
-    <apexchart
-      width="400"
-      type="line"
-      :options="options"
-      :series="series"
-    ></apexchart>
+    <apexchart type="line" :options="options" :series="series"></apexchart>
   </div>
 </template>
 
@@ -17,7 +12,8 @@ export default {
     return {
       options: {
         chart: {
-          id: "vuechart-example",
+          id: "total-cases",
+          width: "100%",
           toolbar: {
             show: false
           }
@@ -28,7 +24,7 @@ export default {
         },
         yaxis: {
           title: {
-            text: "Coronavirus Cases"
+            text: "COVID-19 Cases"
           }
         }
       },
@@ -46,7 +42,6 @@ export default {
       days.push(element.date);
     });
     this.options.xaxis.categories = days;
-    console.log(this.options.xaxis.categories);
     const arrayTotals = [];
     this.chartcontagions.forEach(function(element) {
       arrayTotals.push(element.total);

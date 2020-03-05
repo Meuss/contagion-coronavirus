@@ -83,7 +83,7 @@ export default {
         let dayTotal = 0;
         // "0225"
         const str = key.replace("data_", "");
-        const str2 = [str.slice(0, 2), ".", str.slice(2, 4), ".2020"].join("");
+        const str2 = [str.slice(2, 4), ".", str.slice(0, 2)].join("");
         obj["date"] = str2;
         val.forEach(function(element) {
           dayTotal += element["Cases"];

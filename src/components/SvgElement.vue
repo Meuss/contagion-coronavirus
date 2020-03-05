@@ -385,10 +385,10 @@ export default {
           } else if (x > 5 && x <= 10) {
             circle.r.baseVal.value = 15;
             pulse.r.baseVal.value = 15;
-          } else if (x > 10 && x <= 20) {
+          } else if (x > 10 && x <= 19) {
             circle.r.baseVal.value = 20;
             pulse.r.baseVal.value = 20;
-          } else if (x > 20) {
+          } else if (x > 19) {
             circle.r.baseVal.value = 20;
             pulse.r.baseVal.value = 20;
             // create new circle
@@ -396,8 +396,8 @@ export default {
               "http://www.w3.org/2000/svg",
               "circle"
             );
-            const randomX = Math.floor(Math.random() * 30) + 5;
-            const randomY = Math.floor(Math.random() * 30) + 5;
+            const randomX = Math.floor(Math.random() * 30) + 10;
+            const randomY = Math.floor(Math.random() * 30) + 10;
             additionalCircle.setAttribute(
               "cx",
               circle.cx.baseVal.value + randomX
