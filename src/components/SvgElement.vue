@@ -322,7 +322,7 @@
         <circle id="VD" cx="156" cy="401" r="0" />
         <circle id="VS" cx="392" cy="549" r="0" />
         <circle id="NE" cx="204" cy="278" r="0" />
-        <circle id="GE" cx="55" cy="540" r="0" />
+        <circle id="GE" cx="60" cy="540" r="0" />
         <circle id="JU" cx="300" cy="160" r="0" />
       </g>
       <g id="pulses">
@@ -350,7 +350,7 @@
         <circle class="VD pulse" cx="156" cy="401" r="0" />
         <circle class="VS pulse" cx="392" cy="549" r="0" />
         <circle class="NE pulse" cx="204" cy="278" r="0" />
-        <circle class="GE pulse" cx="55" cy="540" r="0" />
+        <circle class="GE pulse" cx="60" cy="540" r="0" />
         <circle class="JU pulse" cx="300" cy="160" r="0" />
       </g>
     </svg>
@@ -400,66 +400,77 @@ export default {
         const pulse = document.querySelector(`.${key}.pulse`);
         if (values) {
           const x = values.cases;
-          if (x == 1) {
-            circle.r.baseVal.value = 4;
-            pulse.r.baseVal.value = 4;
-          } else if (x == 2) {
-            circle.r.baseVal.value = 7;
-            pulse.r.baseVal.value = 7;
+          let c = 0;
+          if (x <= 2) {
+            c = 4;
           } else if (x > 2 && x <= 6) {
-            circle.r.baseVal.value = 10;
-            pulse.r.baseVal.value = 10;
+            c = 8;
           } else if (x > 6 && x <= 10) {
-            circle.r.baseVal.value = 15;
-            pulse.r.baseVal.value = 15;
+            c = 12;
           } else if (x > 10 && x <= 19) {
-            circle.r.baseVal.value = 20;
-            pulse.r.baseVal.value = 20;
-          } else if (x > 19) {
-            circle.r.baseVal.value = 20;
-            pulse.r.baseVal.value = 20;
-            // create new circle
-            const additionalCircle = document.createElementNS(
-              "http://www.w3.org/2000/svg",
-              "circle"
-            );
-            const randomX = Math.floor(Math.random() * 30) + 7;
-            const randomY = Math.floor(Math.random() * 30) + 7;
-            additionalCircle.setAttribute(
-              "cx",
-              circle.cx.baseVal.value + randomX
-            );
-            additionalCircle.setAttribute(
-              "cy",
-              circle.cy.baseVal.value + randomY
-            );
-            additionalCircle.setAttribute("r", "10");
-            additionalCircle.setAttribute("fill", "#ef233c");
-            additionalCircle.setAttribute("class", "additional");
-            document.querySelector("#circles").appendChild(additionalCircle);
-            // create new pulse
-            const additionalPulse = document.createElementNS(
-              "http://www.w3.org/2000/svg",
-              "circle"
-            );
-            additionalPulse.setAttribute(
-              "cx",
-              circle.cx.baseVal.value + randomX
-            );
-            additionalPulse.setAttribute(
-              "cy",
-              circle.cy.baseVal.value + randomY
-            );
-            additionalPulse.setAttribute("r", "10");
-            additionalPulse.setAttribute("fill", "#ef233c");
-            additionalPulse.setAttribute("class", "pulse additional");
-            document.querySelector("#pulses").appendChild(additionalPulse);
+            c = 17;
+          } else if (x > 10 && x <= 19) {
+            c = 20;
+          } else if (x > 19 && x <= 25) {
+            c = 25;
+          } else if (x > 25 && x <= 30) {
+            c = 30;
+          } else if (x > 30) {
+            c = 35;
+            // } else if (x > 19) {
+            // c = 20;
+            // if (x > 25 && x <= 30) {
+            //   this.createNewCircle(
+            //     circle.cx.baseVal.value,
+            //     circle.cy.baseVal.value,
+            //     x
+            //   );
+            // } else if (x > 30) {
+            //   this.createNewCircle(
+            //     circle.cx.baseVal.value,
+            //     circle.cy.baseVal.value,
+            //     x
+            //   );
+            //   this.createNewCircle(
+            //     circle.cx.baseVal.value,
+            //     circle.cy.baseVal.value,
+            //     x
+            //   );
+            // }
           }
+          circle.r.baseVal.value = c;
+          pulse.r.baseVal.value = c;
         } else {
           circle.r.baseVal.value = 0;
           pulse.r.baseVal.value = 0;
         }
       });
+    },
+    createNewCircle(x, y, size) {
+      // create new circle
+      const additionalCircle = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "circle"
+      );
+      const randomX = Math.floor(Math.random() * size + 5) + 10;
+      const randomY = Math.floor(Math.random() * size + 5) + 10;
+      additionalCircle.setAttribute("cx", x + randomX);
+      additionalCircle.setAttribute("cy", y + randomY);
+      additionalCircle.setAttribute("r", "10");
+      additionalCircle.setAttribute("fill", "#ef233c");
+      additionalCircle.setAttribute("class", "additional");
+      document.querySelector("#circles").appendChild(additionalCircle);
+      // create new pulse
+      const additionalPulse = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "circle"
+      );
+      additionalPulse.setAttribute("cx", x + randomX);
+      additionalPulse.setAttribute("cy", y + randomY);
+      additionalPulse.setAttribute("r", "10");
+      additionalPulse.setAttribute("fill", "#ef233c");
+      additionalPulse.setAttribute("class", "pulse additional");
+      document.querySelector("#pulses").appendChild(additionalPulse);
     },
     setDeath(circle) {
       // TODO: multiple circles per canton will break this
@@ -469,10 +480,10 @@ export default {
             "http://www.w3.org/2000/svg",
             "image"
           );
-          deathImg.setAttribute("x", circle.cx.baseVal.value - 12);
-          deathImg.setAttribute("y", circle.cy.baseVal.value - 12);
-          deathImg.setAttribute("width", 25);
-          deathImg.setAttribute("height", 25);
+          deathImg.setAttribute("x", circle.cx.baseVal.value - 15);
+          deathImg.setAttribute("y", circle.cy.baseVal.value - 15);
+          deathImg.setAttribute("width", 30);
+          deathImg.setAttribute("height", 30);
           deathImg.setAttribute("href", "skull.svg");
           deathImg.setAttribute("class", "skull");
           document.querySelector("#swiss_map").appendChild(deathImg);
