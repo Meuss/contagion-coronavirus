@@ -11,7 +11,6 @@
         :format="customFormatter"
         @selected="changeDate"
         monday-first
-        v-model="today"
       />
     </div>
     <SvgElement :contagions="contagions" :totalcases="totalCases" />
@@ -36,9 +35,8 @@ export default {
     return {
       disabledDates: {
         to: new Date(2020, 1, 25), // Disable all dates up to specific date
-        from: new Date() // Disable all dates after specific date
+        from: new Date(2020, 2, 10) // Disable all dates after specific date
       },
-      today: new Date(),
       data,
       contagions: [],
       chartcontagions: [],
@@ -91,9 +89,14 @@ export default {
         obj["date"] = dateString;
         // prepare the totals
         let dayTotal = 0;
-        val.forEach(function(element) {
-          dayTotal += element["Cases"];
-        });
+        if (key === "data_0307") {
+          dayTotal = 267;
+        } else {
+          val.forEach(function(element) {
+            dayTotal += element["Cases"];
+          });
+        }
+
         obj["total"] = dayTotal;
         // push dates + totals
         this.chartcontagions.push(obj);
@@ -113,10 +116,13 @@ export default {
           obj["deaths"] = element.Deaths;
           this.contagions.push(obj);
         });
-        // total cases
-        this.contagions.forEach(element => {
-          this.totalCases += element["cases"];
-        });
+        if (x === "data_0307") {
+          this.totalCases = 267;
+        } else {
+          this.contagions.forEach(element => {
+            this.totalCases += element["cases"];
+          });
+        }
       } else {
         // unavailable: get last day with data
         let i = 0;
@@ -144,7 +150,6 @@ export default {
 
 <style scoped lang="scss">
 .active {
-  font-size: 1.4em;
   margin-bottom: 0;
   margin-top: 0;
   strong {

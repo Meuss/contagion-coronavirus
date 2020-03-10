@@ -2,6 +2,12 @@
   <div id="app">
     <h2>Contagion</h2>
     <h1>Coronavirus in Switzerland</h1>
+    <h3>09.03.2020: Project outdated</h3>
+    <p>
+      The government has decided to stop testing patients with mild symptoms,
+      and focus only on the elderly or people at risk.
+    </p>
+    <p>Tracking is over. It is everywhere.</p>
     <Data />
     <footer>
       <p>
