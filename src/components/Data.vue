@@ -11,6 +11,7 @@
         :format="customFormatter"
         @selected="changeDate"
         monday-first
+        v-model="today"
       />
     </div>
     <SvgElement :contagions="contagions" :totalcases="totalCases" />
@@ -35,9 +36,10 @@ export default {
     return {
       disabledDates: {
         to: new Date(2020, 1, 25), // Disable all dates up to specific date
-        from: new Date(2020, 2, 10) // Disable all dates after specific date
+        from: new Date() // Disable all dates after specific date
       },
       data,
+      today: new Date(),
       contagions: [],
       chartcontagions: [],
       totalCases: 0,
