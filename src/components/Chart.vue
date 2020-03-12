@@ -6,6 +6,7 @@
 
 <script>
 import VueApexCharts from "vue-apexcharts";
+// import moment from "moment";
 export default {
   props: ["chartcontagions"],
   data() {
@@ -21,24 +22,49 @@ export default {
             enabled: false
           }
         },
-        dataLabels: {
-          enabled: true
+        annotations: {
+          xaxis: [
+            {
+              x: "+13",
+              borderColor: "#ef233c",
+              label: {
+                borderColor: "#ef233c",
+                style: {
+                  color: "#fff",
+                  background: "#ef233c",
+                  fontWeight: 700
+                },
+                text: "Testing stopped"
+              }
+            }
+          ]
         },
-        colors: ["#ef233c"],
+        dataLabels: {
+          // enabled: true
+        },
+        colors: ["#ef233c", "#00ffff"],
         xaxis: {
-          categories: ["1", "asdf", "234"]
+          type: "category",
+          categories: [],
+          title: {
+            text: "Days since first case"
+          }
         },
         yaxis: {
           title: {
-            text: "COVID-19 Cases"
+            text: "Total COVID-19 Cases in Switzerland"
           }
         }
       },
       series: [
         {
-          name: "Total cases",
+          name: "Infected",
           data: []
         }
+        // {
+        //   name: "Italy",
+        //   data: [3, 3, 3, 3, 4, 21, 79, 157, 229, 323, 470, 655, 889, 1128]
+        // }
       ]
     };
   },
@@ -62,7 +88,7 @@ export default {
 
 <style lang="scss" scoped>
 .chart-wrapper {
-  max-width: 500px;
+  max-width: 700px;
   margin: 0 auto;
 }
 </style>

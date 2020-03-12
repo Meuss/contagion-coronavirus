@@ -80,15 +80,22 @@ export default {
   methods: {
     // prepare data for the Chart component
     loadChartData() {
+      let day = 0;
       Object.entries(this.data.days).forEach(([key, val]) => {
         const obj = {};
         // format the dates
-        const dateString = [
-          key.replace("data_", "").slice(2, 4),
-          ".",
-          key.replace("data_", "").slice(0, 2)
-        ].join("");
-        obj["date"] = dateString;
+        // const dateString = [
+        //   key.replace("data_", "").slice(2, 4),
+        //   ".",
+        //   key.replace("data_", "").slice(0, 2)
+        // ].join("");
+        // obj["date"] = dateString;
+        if (key === "data_0225") {
+          obj["date"] = "25.02";
+        } else {
+          obj["date"] = `+${day}`;
+        }
+        day++;
         // prepare the totals
         let dayTotal = 0;
         if (key === "data_0307") {
