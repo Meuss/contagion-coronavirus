@@ -2,7 +2,14 @@
   <div>
     <p class="active">
       Cases:
-      <strong>{{ totalCases }}</strong>
+      <strong v-if="totalCases < 375">{{ totalCases }}</strong>
+      <!-- after automatic testing stopped -->
+      <strong v-else>{{ totalCases }}+</strong>
+    </p>
+    <p class="active">
+      Deaths:
+      <strong v-if="isNaN(totalDeaths)">0</strong>
+      <strong v-else>{{ totalDeaths }}</strong>
     </p>
     <div class="choose-date">
       <p>Date:</p>
@@ -35,14 +42,15 @@ export default {
   data() {
     return {
       disabledDates: {
-        to: new Date(2020, 1, 25), // Disable all dates up to specific date
-        from: new Date() // Disable all dates after specific date
+        to: new Date(2020, 1, 25),
+        from: new Date()
       },
       data,
       today: new Date(),
       contagions: [],
       chartcontagions: [],
       totalCases: 0,
+      totalDeaths: 0,
       cantons: [
         { name: "Zurich", short: "ZH" },
         { name: "Bern", short: "BE" },
@@ -83,13 +91,6 @@ export default {
       let day = 0;
       Object.entries(this.data.days).forEach(([key, val]) => {
         const obj = {};
-        // format the dates
-        // const dateString = [
-        //   key.replace("data_", "").slice(2, 4),
-        //   ".",
-        //   key.replace("data_", "").slice(0, 2)
-        // ].join("");
-        // obj["date"] = dateString;
         if (key === "data_0225") {
           obj["date"] = "25.02";
         } else {
@@ -105,7 +106,6 @@ export default {
             dayTotal += element["Cases"];
           });
         }
-
         obj["total"] = dayTotal;
         // push dates + totals
         this.chartcontagions.push(obj);
@@ -113,8 +113,9 @@ export default {
     },
     loadData(x) {
       this.totalCases = 0;
+      this.totalDeaths = 0;
       this.contagions = [];
-      // process data from csv, create an array of cases objects per canton
+      // process data from csvs, create an array of cases objects per canton
       if (this.data.days[x] !== undefined) {
         this.data.days[x].forEach(element => {
           const obj = {};
@@ -125,15 +126,13 @@ export default {
           obj["deaths"] = element.Deaths;
           this.contagions.push(obj);
         });
-        if (x === "data_0307") {
-          this.totalCases = 267;
-        } else {
-          this.contagions.forEach(element => {
-            this.totalCases += element["cases"];
-          });
-        }
+        this.contagions.forEach(element => {
+          this.totalCases += element["cases"];
+          this.totalDeaths += element["deaths"];
+        });
       } else {
-        // unavailable: get last day with data
+        // unavailable: day not imported yet
+        // => get last day with data
         let i = 0;
         Object.entries(this.data.days).forEach(([key]) => {
           const keyString = [
@@ -170,5 +169,8 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  @media (max-width: 500px) {
+    justify-content: flex-start;
+  }
 }
 </style>

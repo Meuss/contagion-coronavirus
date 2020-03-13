@@ -372,10 +372,11 @@ export default {
           this.contagions.find(x => x.name === key).cases
         }</strong> cases`;
         let deaths = "";
-        if (this.contagions.find(x => x.name === key).deaths > 0) {
-          deaths = `<br/> <strong>${
-            this.contagions.find(x => x.name === key).deaths
-          }</strong> deaths`;
+        const deathsAmount = this.contagions.find(x => x.name === key).deaths;
+        if (deathsAmount === 1) {
+          deaths = `<br/> <strong>${deathsAmount}</strong> death`;
+        } else if (deathsAmount > 1) {
+          deaths = `<br/> <strong>${deathsAmount}</strong> deaths`;
         }
         return `${key}: ${cases}${deaths}`;
       } else {
@@ -417,26 +418,6 @@ export default {
             c = 30;
           } else if (x > 30) {
             c = 35;
-            // } else if (x > 19) {
-            // c = 20;
-            // if (x > 25 && x <= 30) {
-            //   this.createNewCircle(
-            //     circle.cx.baseVal.value,
-            //     circle.cy.baseVal.value,
-            //     x
-            //   );
-            // } else if (x > 30) {
-            //   this.createNewCircle(
-            //     circle.cx.baseVal.value,
-            //     circle.cy.baseVal.value,
-            //     x
-            //   );
-            //   this.createNewCircle(
-            //     circle.cx.baseVal.value,
-            //     circle.cy.baseVal.value,
-            //     x
-            //   );
-            // }
           }
           circle.r.baseVal.value = c;
           pulse.r.baseVal.value = c;
@@ -473,7 +454,6 @@ export default {
       document.querySelector("#pulses").appendChild(additionalPulse);
     },
     setDeath(circle) {
-      // TODO: multiple circles per canton will break this
       if (this.contagions.find(x => x.name === circle.id) !== undefined) {
         if (this.contagions.find(x => x.name === circle.id).deaths > 0) {
           const deathImg = document.createElementNS(

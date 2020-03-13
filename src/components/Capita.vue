@@ -1,20 +1,8 @@
 <template>
   <div class="capita">
-    <hr />
-    <h2>Why is Switzerland not taking more drastic measures?</h2>
-    <h3>
-      Comparing the situation with Italy
-    </h3>
-    <p>
-      This graph compares the amount of
-      <strong>cases per million inhabitants</strong>.<br />
-      It starts on the first day when there was more than 1 in one million
-      infected.
-    </p>
     <div class="chart-wrapper" v-if="loaded">
       <apexchart type="line" :options="options" :series="series"></apexchart>
     </div>
-    <hr />
   </div>
 </template>
 
@@ -87,6 +75,18 @@ export default {
           {
             breakpoint: 600,
             options: {
+              chart: {
+                id: "comparison",
+                fontFamily: "Avenir, Helvetica, Arial, sans-serif",
+                background: "#fff",
+                toolbar: {
+                  show: false
+                },
+                zoom: {
+                  enabled: false
+                },
+                height: "400px"
+              },
               annotations: {
                 xaxis: []
               },
@@ -179,6 +179,12 @@ export default {
       const mapCH = ch[0].cases.map(e =>
         this.perMillion(e, this.population.Switzerland)
       );
+      this.compareLastElement(mapCH);
+
+      // TODO: missing infos for the last two days...
+      mapCH.push(this.perMillion(867, this.population.Switzerland));
+      mapCH.push(this.perMillion(1125, this.population.Switzerland));
+
       const filteredMapCH = mapCH.filter(e => e > 1);
       this.series[0].data = filteredMapCH;
 
@@ -188,21 +194,19 @@ export default {
       const mapIT = it[0].cases.map(e =>
         this.perMillion(e, this.population.Italy)
       );
+      this.compareLastElement(mapIT);
       const filteredMapIT = mapIT.filter(e => e > 1);
       this.series[1].data = filteredMapIT;
-      // const asdf = this.perMillion(it, this.population.Italy);
       this.loaded = true;
+    },
+    compareLastElement(arr) {
+      if (arr[arr.length - 1] === arr[arr.length - 2]) {
+        arr.pop();
+      }
     }
   },
   created() {
     this.getData();
-  },
-  mounted() {
-    // this.italySeries();
-    // const that = this;
-    // setTimeout(function() {
-    //   that.italySeries();
-    // }, 3000);
   }
 };
 </script>

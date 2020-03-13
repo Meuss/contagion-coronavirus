@@ -1,7 +1,15 @@
 <template>
   <div id="app">
     <h1>Contagion of the coronavirus in Switzerland</h1>
+    <h2>Comparing the situation with Italy</h2>
+    <p>
+      This graph compares the amount of
+      <strong>cases per million inhabitants</strong>.<br />
+      It starts on the first day when there was more than 1 in 1'000'000
+      inhabitants that was infected.
+    </p>
     <Capita />
+    <h2>Number of cases in Switzerland</h2>
     <p>
       <strong>Automatic screening stopped on 09.03.2020.</strong><br />Detecting
       the real number of cases in Switzerland is over.
@@ -9,14 +17,20 @@
     <Data />
     <footer>
       <p>
-        <i>Source: FOPH, swissinfo.ch</i>
+        <i><strong>Sources:</strong></i>
       </p>
-      <p>
-        <i
-          >Includes positive test results by the cantons that have yet to be
-          confirmed by Geneva.</i
-        >
-      </p>
+      <ul>
+        <li>
+          <a
+            href="https://www.bag.admin.ch/bag/de/home/krankheiten/ausbrueche-epidemien-pandemien/aktuelle-ausbrueche-epidemien/novel-cov.html"
+            >BAG/OFSP
+          </a>
+        </li>
+        <li><a href="https://github.com/CSSEGISandData">J.Hopkins CSSE</a></li>
+        <li>
+          <a href="https://www.worldometers.info/coronavirus/">Worldometer</a>
+        </li>
+      </ul>
       <p>
         <i>Last updated: {{ timestamp }}</i>
       </p>
@@ -79,14 +93,28 @@ body {
   }
   @media (max-width: 500px) {
     padding: 30px 10px 10px 10px;
+    text-align: left;
   }
 }
 h1 {
-  font-size: 1.5em;
+  font-size: 1.7em;
   margin-top: 0;
+  @media (max-width: 500px) {
+    font-size: 1.5em;
+  }
 }
 h2 {
-  margin: 0;
+  margin-top: 3rem;
+  margin-bottom: 0;
+  text-decoration: underline;
+  @media (max-width: 500px) {
+    font-size: 1.2em;
+  }
+}
+.separator {
+  height: 2px;
+  background-color: rgba(43, 45, 66, 0.4);
+  margin: 2em auto 2em auto;
 }
 .red {
   color: #ef233c;
@@ -107,7 +135,6 @@ h2 {
     animation-delay: #{$i * 0.1}s;
   }
 }
-
 @keyframes pulse {
   from {
     transform: scale(1);
@@ -128,6 +155,20 @@ footer {
     i {
       font-size: 12px;
     }
+  }
+  ul {
+    margin-top: 0;
+    padding: 0;
+    list-style-type: none;
+    line-height: 14px;
+    a {
+      color: #ef233c;
+      font-size: 12px;
+    }
+  }
+  @media (max-width: 500px) {
+    text-align: center;
+    align-items: center;
   }
 }
 .svg-wrapper {
@@ -163,7 +204,6 @@ footer {
   border-color: #f9f9f9;
   z-index: 1;
 }
-
 .tooltip[x-placement^="top"] {
   margin-bottom: 5px;
 }
