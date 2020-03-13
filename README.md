@@ -1,5 +1,12 @@
 # contagion-coronavirus
 
+Data taken from:
+
+- [BAG / OFSP website](https://www.bag.admin.ch/bag/de/home/krankheiten/ausbrueche-epidemien-pandemien/aktuelle-ausbrueche-epidemien/novel-cov/situation-schweiz-und-international.html)
+- [John Hopkins CSSE](https://github.com/CSSEGISandData/COVID-19)
+- [Worldometer](https://www.worldometers.info/coronavirus/)
+
+
 ## Project setup
 ```
 npm install
@@ -14,11 +21,3 @@ npm run serve
 ```
 npm run build
 ```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

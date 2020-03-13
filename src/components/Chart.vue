@@ -6,7 +6,6 @@
 
 <script>
 import VueApexCharts from "vue-apexcharts";
-// import moment from "moment";
 export default {
   props: ["chartcontagions"],
   data() {
@@ -39,9 +38,6 @@ export default {
             }
           ]
         },
-        dataLabels: {
-          // enabled: true
-        },
         colors: ["#ef233c", "#00ffff"],
         xaxis: {
           type: "category",
@@ -54,17 +50,23 @@ export default {
           title: {
             text: "Total COVID-19 Cases in Switzerland"
           }
-        }
+        },
+        responsive: [
+          {
+            breakpoint: 600,
+            options: {
+              chart: {
+                height: "400px"
+              }
+            }
+          }
+        ]
       },
       series: [
         {
           name: "Infected",
           data: []
         }
-        // {
-        //   name: "Italy",
-        //   data: [3, 3, 3, 3, 4, 21, 79, 157, 229, 323, 470, 655, 889, 1128]
-        // }
       ]
     };
   },
