@@ -180,19 +180,24 @@ export default {
         this.perMillion(e, this.population.Italy)
       );
       const filteredMapIT = mapIT.filter(e => e > 1);
-      this.series[1].data = filteredMapIT;
+      this.createSeries(filteredMapIT, 1);
     },
     swissSeries(x) {
       // SWISS DATA
       const ch = [{}];
       ch[0].id = "Switzerland";
       ch[0].cases = x;
-
       const mapCH = ch[0].cases.map(e =>
         this.perMillion(e, this.population.Switzerland)
       );
       const filteredMapCH = mapCH.filter(e => e > 1);
-      this.series[0].data = filteredMapCH;
+      filteredMapCH.push(null, null, null, null, null); // to have the same length of Italy, so that tooltip shows both numbers
+      this.createSeries(filteredMapCH, 0);
+    },
+    createSeries(data, index) {
+      const series = [];
+      data.forEach(e => series.push(e));
+      this.series[index].data = series;
     },
     perMillion(x, population) {
       const modified = ((x / population) * 1000000).toFixed(2);
