@@ -176,7 +176,6 @@ export default {
       const toDate = moment(to);
       const daysBetweenDays = toDate.diff(fromDate, "days");
       const perfectIncrement = Math.floor(daysBetweenDays / (maxSteps - 1));
-      console.log(daysBetweenDays, perfectIncrement);
 
       let day = fromDate;
 
@@ -209,8 +208,18 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  @media (max-width: 600px) {
+    flex-direction: column;
+    margin-top: 13px;
+    > div {
+      width: 100%;
+    }
+  }
   @media (max-width: 500px) {
-    justify-content: flex-start;
+    align-items: flex-start;
+    > div {
+      font-size: 12px;
+    }
   }
 }
 </style>

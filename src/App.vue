@@ -26,7 +26,11 @@
             >BAG/OFSP
           </a>
         </li>
-        <li><a href="https://github.com/CSSEGISandData">J.Hopkins CSSE</a></li>
+        <li>
+          <a href="https://github.com/techengines/coronavirus-stats-italy"
+            >TechEngines.AI</a
+          >
+        </li>
         <li>
           <a href="https://www.worldometers.info/coronavirus/">Worldometer</a>
         </li>
@@ -239,14 +243,5 @@ footer {
   visibility: visible;
   opacity: 1;
   transition: opacity 0.15s;
-}
-.vdp-datepicker {
-  margin-left: 10px;
-  input {
-    font-size: 14px;
-    font-weight: bold;
-    text-align: center;
-    outline: transparent;
-  }
 }
 </style>

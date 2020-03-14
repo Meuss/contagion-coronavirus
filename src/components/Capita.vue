@@ -1,7 +1,7 @@
 <template>
   <div class="capita">
     <div class="chart-wrapper" v-if="loaded">
-      <apexchart type="line" :options="options" :series="series"></apexchart>
+      <apexchart :options="options" :series="series" type="line"></apexchart>
     </div>
   </div>
 </template>
@@ -17,7 +17,9 @@ export default {
     return {
       rawData: [],
       loaded: false,
-      papaConfig: {},
+      papaConfig: {
+        header: true
+      },
       population: {
         Switzerland: 8654622,
         Italy: 60461826
@@ -125,84 +127,76 @@ export default {
   methods: {
     getData() {
       fetch(
-        "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv"
+        "https://raw.githubusercontent.com/techengines/coronavirus-stats-italy/master/data/italy/nationwide_it.csv"
       )
         .then(response => response.text())
         .then(text => {
           this.prepareData(text);
         });
     },
-    prepareData(data) {
-      // get all data
-      const allData = Papa.parse(data, this.papaConfig);
-      // get swiss data
-      const rawSwitzerland = allData.data.find(
-        country => country[1] === "Switzerland"
+    prepareData(ITdata) {
+      // Use Techengines data for IT
+      this.italySeries(ITdata);
+      // Use BAG data for CH.
+      const swissData = [
+        "1",
+        "2",
+        "8",
+        "15",
+        "21",
+        "25",
+        "32",
+        "47",
+        "80",
+        "112",
+        "185",
+        "267",
+        "328",
+        "373",
+        "470",
+        "645",
+        "850",
+        "1125",
+        "1353"
+      ];
+      this.swissSeries(swissData);
+      // load chart
+      this.loaded = true;
+    },
+    italySeries(x) {
+      // ITALY DATA
+      const italy_data = Papa.parse(x, this.papaConfig);
+      // some array cardio
+      const italy_ordered = italy_data.data.reverse();
+      italy_ordered.shift();
+      const italy_array = [];
+      italy_ordered.forEach(e => {
+        italy_array.push(e.positive.replace(".0", ""));
+      });
+      const it = [{}];
+      it[0].id = "Italy";
+      it[0].cases = italy_array;
+      const mapIT = it[0].cases.map(e =>
+        this.perMillion(e, this.population.Italy)
       );
-      // remove useless swiss data
-      const Switzerland = rawSwitzerland
-        .filter(a => a != "0")
-        .filter(b => b != "Switzerland")
-        .filter(c => c != "46.8182")
-        .filter(d => d != "8.2275")
-        .filter(e => e != "");
-      // create swiss object
-      const swissobject = {
-        id: "Switzerland",
-        cases: Switzerland
-      };
-      // get italy data
-      const rawItaly = allData.data.find(country => country[1] === "Italy");
-      // remove useless italy data
-      const Italy = rawItaly
-        .filter(a => a != "0")
-        .filter(b => b != "Italy")
-        .filter(c => c != "43")
-        .filter(d => d != "12")
-        .filter(e => e != "");
-      // create italy object
-      const italyobject = {
-        id: "Italy",
-        cases: Italy
-      };
-      this.rawData.push(swissobject, italyobject);
-      this.prepareSeries();
+      const filteredMapIT = mapIT.filter(e => e > 1);
+      this.series[1].data = filteredMapIT;
+    },
+    swissSeries(x) {
+      // SWISS DATA
+      const ch = [{}];
+      ch[0].id = "Switzerland";
+      ch[0].cases = x;
+
+      const mapCH = ch[0].cases.map(e =>
+        this.perMillion(e, this.population.Switzerland)
+      );
+      const filteredMapCH = mapCH.filter(e => e > 1);
+      this.series[0].data = filteredMapCH;
     },
     perMillion(x, population) {
       const modified = ((x / population) * 1000000).toFixed(2);
       return modified;
-    },
-    prepareSeries() {
-      const ch = this.rawData.filter(obj => {
-        return obj.id === "Switzerland";
-      });
-      const mapCH = ch[0].cases.map(e =>
-        this.perMillion(e, this.population.Switzerland)
-      );
-      this.compareLastElement(mapCH);
-
-      // TODO: missing infos for the last two days...
-      mapCH.push(this.perMillion(867, this.population.Switzerland));
-      mapCH.push(this.perMillion(1125, this.population.Switzerland));
-
-      const filteredMapCH = mapCH.filter(e => e > 1);
-      this.series[0].data = filteredMapCH;
-
-      const it = this.rawData.filter(obj => {
-        return obj.id === "Italy";
-      });
-      const mapIT = it[0].cases.map(e =>
-        this.perMillion(e, this.population.Italy)
-      );
-      this.compareLastElement(mapIT);
-      const filteredMapIT = mapIT.filter(e => e > 1);
-      this.series[1].data = filteredMapIT;
-      this.loaded = true;
-    },
-    compareLastElement(arr) {
-      if (arr[arr.length - 1] === arr[arr.length - 2]) {
-        arr.pop();
-      }
     }
   },
   created() {

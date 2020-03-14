@@ -3,7 +3,7 @@
 Data taken from:
 
 - [BAG / OFSP website](https://www.bag.admin.ch/bag/de/home/krankheiten/ausbrueche-epidemien-pandemien/aktuelle-ausbrueche-epidemien/novel-cov/situation-schweiz-und-international.html)
-- [John Hopkins CSSE](https://github.com/CSSEGISandData/COVID-19)
+- [Techengines/coronavirus-stats-italy](https://github.com/techengines/coronavirus-stats-italy)
 - [Worldometer](https://www.worldometers.info/coronavirus/)
 
 
