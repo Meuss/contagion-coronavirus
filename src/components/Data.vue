@@ -13,13 +13,12 @@
     </p>
     <div class="choose-date">
       <p>Date:</p>
-      <Datepicker
-        :disabled-dates="disabledDates"
-        :format="customFormatter"
-        @selected="changeDate"
-        monday-first
-        v-model="today"
-      />
+      <v-slider
+        v-model="selectedDate"
+        :tick-labels="sliderDatesFromatted"
+        :max="sliderDates.length - 1"
+        ticks="always"
+      ></v-slider>
     </div>
     <SvgElement :contagions="contagions" :totalcases="totalCases" />
     <Chart :chartcontagions="chartcontagions" />
@@ -27,7 +26,6 @@
 </template>
 
 <script>
-import Datepicker from "vuejs-datepicker";
 import moment from "moment";
 import data from "../assets/data.js";
 import SvgElement from "./SvgElement.vue";
@@ -36,8 +34,7 @@ export default {
   name: "Data",
   components: {
     SvgElement,
-    Chart,
-    Datepicker
+    Chart
   },
   data() {
     return {
@@ -51,6 +48,12 @@ export default {
       chartcontagions: [],
       totalCases: 0,
       totalDeaths: 0,
+      value: 0,
+      fruits: 0,
+      sliderDates: [],
+      sliderDatesFromatted: [],
+      maxTicks: 7,
+      currentDate: 0,
       cantons: [
         { name: "Zurich", short: "ZH" },
         { name: "Bern", short: "BE" },
@@ -81,7 +84,20 @@ export default {
       ]
     };
   },
+  computed: {
+    selectedDate: {
+      get() {
+        return this.currentDate;
+      },
+      set(value) {
+        this.currentDate = value;
+        this.changeDate();
+      }
+    }
+  },
   created() {
+    this.currentDate = this.maxTicks - 1;
+    this.setSliderDates(new Date(2020, 1, 25), new Date(), this.maxTicks);
     this.loadData(`data_${moment(new Date()).format("MMDD")}`);
     this.loadChartData();
   },
@@ -149,8 +165,32 @@ export default {
     customFormatter(date) {
       return moment(date).format("DD.MM.YYYY");
     },
-    changeDate(x) {
-      this.loadData(`data_${moment(x).format("MMDD")}`);
+    changeDate() {
+      this.previousSelectedDate = this.selectedDate;
+      this.loadData(
+        `data_${this.sliderDates[this.selectedDate].format("MMDD")}`
+      );
+    },
+    setSliderDates(from, to, maxSteps) {
+      const fromDate = moment(from);
+      const toDate = moment(to);
+      const daysBetweenDays = toDate.diff(fromDate, "days");
+      const perfectIncrement = Math.floor(daysBetweenDays / (maxSteps - 1));
+      console.log(daysBetweenDays, perfectIncrement);
+
+      let day = fromDate;
+
+      const addDay = day => {
+        this.sliderDates.push(day);
+        this.sliderDatesFromatted.push(day.format("DD.MM"));
+      };
+
+      for (let i = 0; i < maxSteps - 1; i++) {
+        addDay(day);
+        day = day.clone().add(perfectIncrement, "d");
+      }
+
+      addDay(toDate);
     }
   }
 };
