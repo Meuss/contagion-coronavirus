@@ -190,8 +190,8 @@ export default {
       const mapCH = ch[0].cases.map(e =>
         this.perMillion(e, this.population.Switzerland)
       );
-      const filteredMapCH = mapCH.filter(e => e > 1);
-      filteredMapCH.push(null, null, null, null, null); // to have the same length of Italy, so that tooltip shows both numbers
+      const filteredMapCH = mapCH.filter(e => e > 0.91);
+      filteredMapCH.push(null, null, null, null); // to have the same length of Italy, so that tooltip shows both numbers
       this.createSeries(filteredMapCH, 0);
     },
     createSeries(data, index) {
