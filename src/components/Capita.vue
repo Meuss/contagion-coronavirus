@@ -8,7 +8,7 @@
 
 <script>
 import VueApexCharts from "vue-apexcharts";
-import Papa from "papaparse";
+// import Papa from "papaparse";
 export default {
   components: {
     apexchart: VueApexCharts
@@ -37,9 +37,23 @@ export default {
           }
         },
         annotations: {
+          position: "back",
           xaxis: [
             {
-              x: 10,
+              x: 17,
+              borderColor: "#179E87",
+              label: {
+                borderColor: "#179E87",
+                style: {
+                  color: "#fff",
+                  background: "#179E87",
+                  fontWeight: 700
+                },
+                text: "Italy quarantine 09.03"
+              }
+            },
+            {
+              x: 19,
               borderColor: "#ef233c",
               label: {
                 borderColor: "#ef233c",
@@ -48,7 +62,7 @@ export default {
                   background: "#ef233c",
                   fontWeight: 700
                 },
-                text: "Testing stopped"
+                text: "CH 16.03"
               }
             }
           ]
@@ -134,10 +148,40 @@ export default {
           this.prepareData(text);
         });
     },
-    prepareData(ITdata) {
+    prepareData() {
       // Use Techengines data for IT
-      this.italySeries(ITdata);
+      // TEMPORARY FIX: hard coding data.
+      // https://github.com/techengines/coronavirus-stats-italy/blob/master/data/italy/nationwide_it.csv
+      const itData = [
+        "19",
+        "76",
+        "152",
+        "229",
+        "322",
+        "400",
+        "650",
+        "888",
+        "1128",
+        "1694",
+        "2036",
+        "2502",
+        "3089",
+        "3858",
+        "3916",
+        "5061",
+        "6387",
+        "7985",
+        "8514",
+        "10590",
+        "12839",
+        "14955",
+        "17750",
+        "24747"
+      ];
+      this.italySeries(itData);
+
       // Use BAG data for CH.
+
       const swissData = [
         "1",
         "2",
@@ -157,31 +201,44 @@ export default {
         "645",
         "850",
         "1125",
-        "1353"
+        "1353",
+        "2200",
+        "2330"
       ];
       this.swissSeries(swissData);
       // load chart
       this.loaded = true;
     },
     italySeries(x) {
-      // ITALY DATA
-      const italy_data = Papa.parse(x, this.papaConfig);
-      // some array cardio
-      const italy_ordered = italy_data.data.reverse();
-      italy_ordered.shift();
-      const italy_array = [];
-      italy_ordered.forEach(e => {
-        italy_array.push(e.positive.replace(".0", ""));
-      });
       const it = [{}];
       it[0].id = "Italy";
-      it[0].cases = italy_array;
+      it[0].cases = x;
       const mapIT = it[0].cases.map(e =>
         this.perMillion(e, this.population.Italy)
       );
-      const filteredMapIT = mapIT.filter(e => e > 1);
+      const filteredMapIT = mapIT.filter(e => e > 0.91);
+      // filteredMapIT.push(null, null, null, null); // to have the same length of Italy, so that tooltip shows both numbers
       this.createSeries(filteredMapIT, 1);
     },
+    // italySeries(x) {
+    //   // ITALY DATA
+    //   const italy_data = Papa.parse(x, this.papaConfig);
+    //   // some array cardio
+    //   const italy_ordered = italy_data.data.reverse();
+    //   italy_ordered.shift();
+    //   const italy_array = [];
+    //   italy_ordered.forEach(e => {
+    //     italy_array.push(e.positive.replace(".0", ""));
+    //   });
+    //   const it = [{}];
+    //   it[0].id = "Italy";
+    //   it[0].cases = italy_array;
+    //   const mapIT = it[0].cases.map(e =>
+    //     this.perMillion(e, this.population.Italy)
+    //   );
+    //   const filteredMapIT = mapIT.filter(e => e > 1);
+    //   this.createSeries(filteredMapIT, 1);
+    // },
     swissSeries(x) {
       // SWISS DATA
       const ch = [{}];
@@ -191,7 +248,7 @@ export default {
         this.perMillion(e, this.population.Switzerland)
       );
       const filteredMapCH = mapCH.filter(e => e > 0.91);
-      filteredMapCH.push(null, null, null, null); // to have the same length of Italy, so that tooltip shows both numbers
+      filteredMapCH.push(null, null, null, null, null); // to have the same length of Italy, so that tooltip shows both numbers
       this.createSeries(filteredMapCH, 0);
     },
     createSeries(data, index) {
@@ -205,7 +262,7 @@ export default {
     }
   },
   created() {
-    this.getData();
+    this.prepareData();
   }
 };
 </script>

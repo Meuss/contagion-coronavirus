@@ -11,8 +11,16 @@
     <Capita />
     <h2>Number of cases in Switzerland</h2>
     <p>
-      <strong>Automatic screening stopped on 09.03.2020.</strong><br />Detecting
-      the real number of cases in Switzerland is over.
+      Automatic screening stopped on 09.03.2020.
+    </p>
+    <p>
+      The
+      <a
+        href="https://www.bag.admin.ch/bag/de/home/krankheiten/ausbrueche-epidemien-pandemien/aktuelle-ausbrueche-epidemien/novel-cov.html"
+        target="_blank"
+        >BAG/OFSP</a
+      >
+      hasn't communicated the exact amount of cases in Switzerland.
     </p>
     <Data />
     <footer>
@@ -108,8 +116,8 @@ h1 {
   }
 }
 h2 {
-  margin-top: 3rem;
-  margin-bottom: 0;
+  margin-top: 3.5rem;
+  margin-bottom: 1rem;
   text-decoration: underline;
   @media (max-width: 500px) {
     font-size: 1.2em;
@@ -243,5 +251,19 @@ footer {
   visibility: visible;
   opacity: 1;
   transition: opacity 0.15s;
+}
+@media (min-width: 601px) {
+  .v-application--is-ltr
+    .v-slider--horizontal
+    .v-slider__tick:first-child
+    .v-slider__tick-label {
+    transform: translateX(-50%) !important;
+  }
+  .v-application--is-ltr
+    .v-slider--horizontal
+    .v-slider__tick:last-child
+    .v-slider__tick-label {
+    transform: translateX(-50%) !important;
+  }
 }
 </style>

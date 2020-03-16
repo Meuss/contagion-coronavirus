@@ -2,9 +2,9 @@
   <div>
     <p class="active">
       Cases:
-      <strong v-if="totalCases < 375">{{ totalCases }}</strong>
+      <!-- <strong v-if="totalCases < 375">{{ totalCases }}</strong> -->
       <!-- after automatic testing stopped -->
-      <strong v-else>{{ totalCases }}+</strong>
+      <strong>{{ totalCases }}</strong>
     </p>
     <p class="active">
       Deaths:
@@ -17,9 +17,13 @@
         v-model="selectedDate"
         :tick-labels="sliderDatesFromatted"
         :max="sliderDates.length - 1"
+        tick-size="4"
         ticks="always"
       ></v-slider>
     </div>
+    <p>
+      <strong>Number of cases per canton is not communicated anymore.</strong>
+    </p>
     <SvgElement :contagions="contagions" :totalcases="totalCases" />
     <Chart :chartcontagions="chartcontagions" />
   </div>
@@ -52,7 +56,8 @@ export default {
       fruits: 0,
       sliderDates: [],
       sliderDatesFromatted: [],
-      maxTicks: 7,
+      maxTicks: 10,
+      maxTicksMobile: 7,
       currentDate: 0,
       cantons: [
         { name: "Zurich", short: "ZH" },
@@ -96,8 +101,17 @@ export default {
     }
   },
   created() {
-    this.currentDate = this.maxTicks - 1;
-    this.setSliderDates(new Date(2020, 1, 25), new Date(), this.maxTicks);
+    if (window.innerWidth < 601) {
+      this.currentDate = this.maxTicksMobile - 1;
+      this.setSliderDates(
+        new Date(2020, 1, 25),
+        new Date(),
+        this.maxTicksMobile
+      );
+    } else {
+      this.currentDate = this.maxTicks - 1;
+      this.setSliderDates(new Date(2020, 1, 25), new Date(), this.maxTicks);
+    }
     this.loadData(`data_${moment(new Date()).format("MMDD")}`);
     this.loadChartData();
   },
@@ -117,6 +131,10 @@ export default {
         let dayTotal = 0;
         if (key === "data_0307") {
           dayTotal = 267;
+        } else if (key === "data_0315") {
+          dayTotal = 2200;
+        } else if (key === "data_0316") {
+          dayTotal = 2330;
         } else {
           val.forEach(function(element) {
             dayTotal += element["Cases"];
@@ -142,10 +160,22 @@ export default {
           obj["deaths"] = element.Deaths;
           this.contagions.push(obj);
         });
-        this.contagions.forEach(element => {
-          this.totalCases += element["cases"];
-          this.totalDeaths += element["deaths"];
-        });
+        if (x === "data_0315") {
+          this.contagions.forEach(element => {
+            this.totalCases = 2217;
+            this.totalDeaths += element["deaths"];
+          });
+        } else if (x === "data_0316") {
+          this.contagions.forEach(element => {
+            this.totalCases = 2330;
+            this.totalDeaths += element["deaths"];
+          });
+        } else {
+          this.contagions.forEach(element => {
+            this.totalCases += element["cases"];
+            this.totalDeaths += element["deaths"];
+          });
+        }
       } else {
         // unavailable: day not imported yet
         // => get last day with data
@@ -185,8 +215,8 @@ export default {
       };
 
       for (let i = 0; i < maxSteps - 1; i++) {
-        addDay(day);
         day = day.clone().add(perfectIncrement, "d");
+        addDay(day);
       }
 
       addDay(toDate);
@@ -206,11 +236,12 @@ export default {
 }
 .choose-date {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  margin-top: 13px;
+  p {
+    margin-bottom: 0px;
+  }
   @media (max-width: 600px) {
-    flex-direction: column;
-    margin-top: 13px;
     > div {
       width: 100%;
     }

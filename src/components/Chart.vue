@@ -21,34 +21,40 @@ export default {
             enabled: false
           }
         },
-        annotations: {
-          xaxis: [
-            {
-              x: "+13",
-              borderColor: "#ef233c",
-              label: {
-                borderColor: "#ef233c",
-                style: {
-                  color: "#fff",
-                  background: "#ef233c",
-                  fontWeight: 700
-                },
-                text: "Testing stopped"
-              }
-            }
-          ]
-        },
+        // annotations: {
+        //   xaxis: [
+        //     {
+        //       x: "+13",
+        //       borderColor: "#ef233c",
+        //       label: {
+        //         borderColor: "#ef233c",
+        //         style: {
+        //           color: "#fff",
+        //           background: "#ef233c",
+        //           fontWeight: 700
+        //         },
+        //         text: "Testing stopped"
+        //       }
+        //     }
+        //   ]
+        // },
         colors: ["#ef233c", "#00ffff"],
         xaxis: {
           type: "category",
           categories: [],
           title: {
-            text: "Days since first case"
+            text: "Days since first case",
+            style: {
+              fontSize: 17
+            }
           }
         },
         yaxis: {
           title: {
-            text: "Total COVID-19 Cases in Switzerland"
+            text: "Total COVID-19 Cases in Switzerland",
+            style: {
+              fontSize: 17
+            }
           }
         },
         responsive: [
@@ -57,6 +63,24 @@ export default {
             options: {
               chart: {
                 height: "400px"
+              },
+              xaxis: {
+                type: "category",
+                categories: [],
+                title: {
+                  text: "Days since first case",
+                  style: {
+                    fontSize: 12
+                  }
+                }
+              },
+              yaxis: {
+                title: {
+                  text: "Total cases in CH",
+                  style: {
+                    fontSize: 12
+                  }
+                }
               }
             }
           }
