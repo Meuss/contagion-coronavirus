@@ -460,11 +460,11 @@ export default {
             "http://www.w3.org/2000/svg",
             "image"
           );
-          deathImg.setAttribute("x", circle.cx.baseVal.value - 15);
-          deathImg.setAttribute("y", circle.cy.baseVal.value - 15);
-          deathImg.setAttribute("width", 30);
-          deathImg.setAttribute("height", 30);
-          deathImg.setAttribute("href", "skull.svg");
+          deathImg.setAttribute("x", circle.cx.baseVal.value - 12.5);
+          deathImg.setAttribute("y", circle.cy.baseVal.value - 12.5);
+          deathImg.setAttribute("width", "25");
+          deathImg.setAttribute("height", "25");
+          deathImg.setAttribute("href", "skull.png");
           deathImg.setAttribute("class", "skull");
           document.querySelector("#swiss_map").appendChild(deathImg);
         }

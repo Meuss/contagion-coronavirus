@@ -153,7 +153,7 @@ export default {
       // TEMPORARY FIX: hard coding data.
       // https://github.com/techengines/coronavirus-stats-italy/blob/master/data/italy/nationwide_it.csv
       const itData = [
-        "19",
+        "19", // 21.02
         "76",
         "152",
         "229",
@@ -176,19 +176,21 @@ export default {
         "12839",
         "14955",
         "17750",
-        "24747"
+        "20603",
+        "23073", // 16.03
+        "26062"
       ];
       this.italySeries(itData);
 
       // Use BAG data for CH.
 
       const swissData = [
-        "1",
+        "1", // 25.02
         "2",
         "8",
-        "15",
+        "15", // Rassemblements 1000 personnes
         "21",
-        "25",
+        "25", // 01.03
         "32",
         "47",
         "80",
@@ -197,13 +199,15 @@ export default {
         "267",
         "328",
         "373",
-        "470",
+        "470", // 10.03
         "645",
         "850",
         "1125",
         "1353",
-        "2200",
-        "2330"
+        "2200", // 15.03
+        "2353", // Situation particulière
+        "2650",
+        "2742"
       ];
       this.swissSeries(swissData);
       // load chart
@@ -217,28 +221,8 @@ export default {
         this.perMillion(e, this.population.Italy)
       );
       const filteredMapIT = mapIT.filter(e => e > 0.91);
-      // filteredMapIT.push(null, null, null, null); // to have the same length of Italy, so that tooltip shows both numbers
       this.createSeries(filteredMapIT, 1);
     },
-    // italySeries(x) {
-    //   // ITALY DATA
-    //   const italy_data = Papa.parse(x, this.papaConfig);
-    //   // some array cardio
-    //   const italy_ordered = italy_data.data.reverse();
-    //   italy_ordered.shift();
-    //   const italy_array = [];
-    //   italy_ordered.forEach(e => {
-    //     italy_array.push(e.positive.replace(".0", ""));
-    //   });
-    //   const it = [{}];
-    //   it[0].id = "Italy";
-    //   it[0].cases = italy_array;
-    //   const mapIT = it[0].cases.map(e =>
-    //     this.perMillion(e, this.population.Italy)
-    //   );
-    //   const filteredMapIT = mapIT.filter(e => e > 1);
-    //   this.createSeries(filteredMapIT, 1);
-    // },
     swissSeries(x) {
       // SWISS DATA
       const ch = [{}];
@@ -248,7 +232,7 @@ export default {
         this.perMillion(e, this.population.Switzerland)
       );
       const filteredMapCH = mapCH.filter(e => e > 0.91);
-      filteredMapCH.push(null, null, null, null, null); // to have the same length of Italy, so that tooltip shows both numbers
+      filteredMapCH.push(null, null, null, null); // to have the same length of Italy, so that tooltip shows both numbers
       this.createSeries(filteredMapCH, 0);
     },
     createSeries(data, index) {

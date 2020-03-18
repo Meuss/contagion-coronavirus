@@ -21,37 +21,32 @@ export default {
             enabled: false
           }
         },
-        // annotations: {
-        //   xaxis: [
-        //     {
-        //       x: "+13",
-        //       borderColor: "#ef233c",
-        //       label: {
-        //         borderColor: "#ef233c",
-        //         style: {
-        //           color: "#fff",
-        //           background: "#ef233c",
-        //           fontWeight: 700
-        //         },
-        //         text: "Testing stopped"
-        //       }
-        //     }
-        //   ]
-        // },
+        annotations: {
+          xaxis: [
+            {
+              x: "+20",
+              borderColor: "#ef233c",
+              label: {
+                borderColor: "#ef233c",
+                style: {
+                  color: "#fff",
+                  background: "#ef233c",
+                  fontWeight: 700
+                },
+                text: "State of emergency"
+              }
+            }
+          ]
+        },
         colors: ["#ef233c", "#00ffff"],
         xaxis: {
           type: "category",
           categories: [],
-          title: {
-            text: "Days since first case",
-            style: {
-              fontSize: 17
-            }
-          }
+          title: {}
         },
         yaxis: {
           title: {
-            text: "Total COVID-19 Cases in Switzerland",
+            text: "Total cases in CH",
             style: {
               fontSize: 17
             }

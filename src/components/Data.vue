@@ -2,8 +2,6 @@
   <div>
     <p class="active">
       Cases:
-      <!-- <strong v-if="totalCases < 375">{{ totalCases }}</strong> -->
-      <!-- after automatic testing stopped -->
       <strong>{{ totalCases }}</strong>
     </p>
     <p class="active">
@@ -21,9 +19,6 @@
         ticks="always"
       ></v-slider>
     </div>
-    <p>
-      <strong>Number of cases per canton is not communicated anymore.</strong>
-    </p>
     <SvgElement :contagions="contagions" :totalcases="totalCases" />
     <Chart :chartcontagions="chartcontagions" />
   </div>
@@ -101,6 +96,15 @@ export default {
     }
   },
   created() {
+    fetch(
+      "https://spreadsheets.google.com/feeds/list/1MV3AsNadM-Uuf5nh-5JBMj3UHcBhDKH7oZ6B5Rornt8/1/public/values?alt=json"
+    )
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        console.log(data);
+      });
     if (window.innerWidth < 601) {
       this.currentDate = this.maxTicksMobile - 1;
       this.setSliderDates(
@@ -112,21 +116,37 @@ export default {
       this.currentDate = this.maxTicks - 1;
       this.setSliderDates(new Date(2020, 1, 25), new Date(), this.maxTicks);
     }
-    this.loadData(`data_${moment(new Date()).format("MMDD")}`);
+    const todayDate = moment(new Date()).format("MMDD");
+    this.loadData(`data_${todayDate}`);
     this.loadChartData();
   },
   methods: {
     // prepare data for the Chart component
     loadChartData() {
-      let day = 0;
+      // let day = 0;
       Object.entries(this.data.days).forEach(([key, val]) => {
         const obj = {};
-        if (key === "data_0225") {
-          obj["date"] = "25.02";
-        } else {
-          obj["date"] = `+${day}`;
-        }
-        day++;
+        const keyString = [
+          key.replace("data_", "").slice(2, 4),
+          key.replace("data_", "").slice(0, 2)
+        ].join(".");
+        obj["date"] = keyString;
+        // if (key === "data_0225") {
+        //   obj["date"] = "25.02";
+        // } else if (key === "data_0301") {
+        //   obj["date"] = "01.03";
+        // } else if (key === "data_0305") {
+        //   obj["date"] = "05.03";
+        // } else if (key === "data_0310") {
+        //   obj["date"] = "10.03";
+        // } else if (key === "data_0315") {
+        //   obj["date"] = "15.03";
+        // } else if (key === "data_0318") {
+        //   obj["date"] = "18.03";
+        // } else {
+        //   obj["date"] = "x";
+        // }
+        // day++;
         // prepare the totals
         let dayTotal = 0;
         if (key === "data_0307") {
@@ -134,7 +154,11 @@ export default {
         } else if (key === "data_0315") {
           dayTotal = 2200;
         } else if (key === "data_0316") {
-          dayTotal = 2330;
+          dayTotal = 2353;
+        } else if (key === "data_0317") {
+          dayTotal = 2650;
+        } else if (key === "data_0318") {
+          dayTotal = 2742;
         } else {
           val.forEach(function(element) {
             dayTotal += element["Cases"];
@@ -167,7 +191,17 @@ export default {
           });
         } else if (x === "data_0316") {
           this.contagions.forEach(element => {
-            this.totalCases = 2330;
+            this.totalCases = 2353;
+            this.totalDeaths += element["deaths"];
+          });
+        } else if (x === "data_0317") {
+          this.contagions.forEach(element => {
+            this.totalCases = 2650;
+            this.totalDeaths += element["deaths"];
+          });
+        } else if (x === "data_0318") {
+          this.contagions.forEach(element => {
+            this.totalCases = 2742;
             this.totalDeaths += element["deaths"];
           });
         } else {
