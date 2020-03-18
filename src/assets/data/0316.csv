@@ -1,25 +1,25 @@
-Lat,Lon,Titel,Cases,Deaths
-46.2017559,6.1466014,Geneva,107,3
-46.6356963,6.5320717,Vaud,273,3
-47.5579097,7.5927728,Basel City,119,4
-47.412396,8.1948321,Aargau,31,0
-47.3723941,8.5423328,Zurich,148,1
-46.3356506,8.753706,Ticino,262,6
-46.6960615,9.6027351,Graubünden,47,0
-46.2303063,7.6605757,Valais,47,1
-47.4839723,7.7347783,Basel Country,48,2
-46.8739775,7.5631943,Bern,78,0
-46.6789116,7.1027113,Fribourg,38,0
-47.1486137,8.5539378,Zug,9,0
-47.0571976,8.7222073,Schwyz,13,0
-46.9895828,6.9292641,Neuchâtel,39,0
-47.2033184,9.3507024,St. Gallen,26,0
-47.0505452,8.3054682,Lucerne,19,0
-47.3960076,9.3705839,Appenzell Ausserrhoden,5,0
-47.3370866,7.2440935,Jura,10,0
-47.5859649,9.1428769,Thurgau,5,0
-47.31874,7.6698284,Solothurn,10,0
-46.9796562,9.108812,Glarus,5,0
-47.7151451,8.519796,Schaffhausen,1,0
-47.7151451,8.519796,Nidwalden,5,0
-47.7151451,8.519796,Obwalden,8,0
+Titel,Cases,Deaths
+Geneva,107,3
+Vaud,273,3
+Basel City,119,3
+Aargau,31,0
+Zurich,148,1
+Ticino,262,6
+Graubünden,47,0
+Valais,47,1
+Basel Country,48,2
+Bern,78,0
+Fribourg,38,0
+Zug,9,0
+Schwyz,13,0
+Neuchâtel,39,0
+St. Gallen,26,0
+Lucerne,19,0
+Appenzell Ausserrhoden,5,0
+Jura,10,0
+Thurgau,5,0
+Solothurn,10,0
+Glarus,5,0
+Schaffhausen,1,0
+Nidwalden,5,0
+Obwalden,8,0

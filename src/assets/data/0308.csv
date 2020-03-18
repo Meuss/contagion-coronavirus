@@ -1,22 +1,22 @@
-Lat,Lon,Titel,Cases,Deaths
-46.2017559,6.1466014,Geneva,38,0
-46.6356963,6.5320717,Vaud,38,1
-47.5579097,7.5927728,Basel City,25,0
-47.412396,8.1948321,Aargau,14,0
-47.3723941,8.5423328,Zurich,34,0
-46.3356506,8.753706,Ticino,57,0
-46.6960615,9.6027351,Graubünden,17,0
-46.2303063,7.6605757,Valais,5,0
-47.4839723,7.7347783,Basel Country,19,1
-46.8739775,7.5631943,Bern,31,0
-46.6789116,7.1027113,Fribourg,7,0
-47.1486137,8.5539378,Zug,6,0
-47.0571976,8.7222073,Schwyz,7,0
-46.9895828,6.9292641,Neuchâtel,13,0
-47.2033184,9.3507024,St. Gallen,2,0
-47.0505452,8.3054682,Lucerne,6,0
-47.3960076,9.3705839,Appenzell Ausserrhoden,3,0
-47.3370866,7.2440935,Jura,3,0
-47.5859649,9.1428769,Thurgau,1,0
-47.31874,7.6698284,Solothurn,1,0
-47.3007262,9.3991527,Appenzell Innerrhoden,1,0
+Titel,Cases,Deaths
+Geneva,38,0
+Vaud,38,1
+Basel City,25,0
+Aargau,14,0
+Zurich,34,0
+Ticino,57,0
+Graubünden,17,0
+Valais,5,0
+Basel Country,19,1
+Bern,31,0
+Fribourg,7,0
+Zug,6,0
+Schwyz,7,0
+Neuchâtel,13,0
+St. Gallen,2,0
+Lucerne,6,0
+Appenzell Ausserrhoden,3,0
+Jura,3,0
+Thurgau,1,0
+Solothurn,1,0
+Appenzell Innerrhoden,1,0

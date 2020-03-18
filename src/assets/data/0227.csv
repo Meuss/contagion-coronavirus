@@ -1,8 +1,8 @@
-Lat,Lon,Titel,Cases
-46.3356506,8.753706,Ticino,1
-46.2017559,6.1466014,Geneva,1
-46.6356963,6.5320717,Vaud,1
-47.412396,8.1948321,Aargau,1
-47.5579097,7.5927728,Basel City,1
-47.3723941,8.5423328,Zurich,1
-46.6960615,9.6027351,Graubünden,2
+Titel,Cases
+Ticino,1
+Geneva,1
+Vaud,1
+Aargau,1
+Basel City,1
+Zurich,1
+Graubünden,2
