@@ -158,7 +158,9 @@ export default {
         } else if (key === "data_0317") {
           dayTotal = 2650;
         } else if (key === "data_0318") {
-          dayTotal = 2742;
+          dayTotal = 3028;
+        } else if (key === "data_0319") {
+          dayTotal = 3169;
         } else {
           val.forEach(function(element) {
             dayTotal += element["Cases"];
@@ -201,7 +203,12 @@ export default {
           });
         } else if (x === "data_0318") {
           this.contagions.forEach(element => {
-            this.totalCases = 2742;
+            this.totalCases = 3028;
+            this.totalDeaths += element["deaths"];
+          });
+        } else if (x === "data_0319") {
+          this.contagions.forEach(element => {
+            this.totalCases = 3169;
             this.totalDeaths += element["deaths"];
           });
         } else {
