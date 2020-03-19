@@ -131,23 +131,6 @@ export default {
           key.replace("data_", "").slice(0, 2)
         ].join(".");
         obj["date"] = keyString;
-        // if (key === "data_0225") {
-        //   obj["date"] = "25.02";
-        // } else if (key === "data_0301") {
-        //   obj["date"] = "01.03";
-        // } else if (key === "data_0305") {
-        //   obj["date"] = "05.03";
-        // } else if (key === "data_0310") {
-        //   obj["date"] = "10.03";
-        // } else if (key === "data_0315") {
-        //   obj["date"] = "15.03";
-        // } else if (key === "data_0318") {
-        //   obj["date"] = "18.03";
-        // } else {
-        //   obj["date"] = "x";
-        // }
-        // day++;
-        // prepare the totals
         let dayTotal = 0;
         if (key === "data_0307") {
           dayTotal = 267;
@@ -160,7 +143,7 @@ export default {
         } else if (key === "data_0318") {
           dayTotal = 3028;
         } else if (key === "data_0319") {
-          dayTotal = 3169;
+          dayTotal = 3888;
         } else {
           val.forEach(function(element) {
             dayTotal += element["Cases"];
@@ -208,7 +191,7 @@ export default {
           });
         } else if (x === "data_0319") {
           this.contagions.forEach(element => {
-            this.totalCases = 3169;
+            this.totalCases = 3888;
             this.totalDeaths += element["deaths"];
           });
         } else {

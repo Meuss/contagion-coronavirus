@@ -209,7 +209,7 @@ export default {
         "2353", // Situation particulière
         "2650",
         "3028",
-        "3219"
+        "3888"
       ];
       this.swissSeries(swissData);
       // load chart
