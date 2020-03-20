@@ -1,18 +1,19 @@
 Titel,Cases,Deaths
-Aargau,101,0
+Switzerland,4281,0
+Aargau,118,0
 Appenzell Ausserrhoden,16,0
 Appenzell Innerrhoden,3,0
 Bern,215,1
 Basel City,222,4
 Basel Country,116,2
 Fribourg,82,1
-Geneva,468,3
+Geneva,468,5
 Glarus,16,0
 Graubünden,123,1
-Jura,25,0
+Jura,27,0
 Lucerne,63,0
-Neuchâtel,99,1
-Nidwalden,20,0
+Neuchâtel,132,1
+Nidwalden,25,0
 Obwalden,17,0
 St. Gallen,85,0
 Schaffhausen,8,0
@@ -20,8 +21,8 @@ Schwyz,35,0
 Solothurn,39,0
 Ticino,638,15
 Thurgau,36,0
-Uri,5,0
-Valais,176,3
+Uri,7,0
+Valais,232,3
 Vaud,919,3
 Zurich,526,3
 Zug,23,0

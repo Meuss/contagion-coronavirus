@@ -139,18 +139,9 @@ export default {
     };
   },
   methods: {
-    getData() {
-      fetch(
-        "https://raw.githubusercontent.com/techengines/coronavirus-stats-italy/master/data/italy/nationwide_it.csv"
-      )
-        .then(response => response.text())
-        .then(text => {
-          this.prepareData(text);
-        });
-    },
     prepareData() {
       // Use Techengines data for IT
-      // TEMPORARY FIX: hard coding data.
+      // FIX: hard coding data.
       // https://github.com/techengines/coronavirus-stats-italy/blob/master/data/italy/nationwide_it.csv
       const itData = [
         "19", // 21.02
@@ -179,7 +170,8 @@ export default {
         "20603",
         "23073", // 16.03
         "26062",
-        "28710"
+        "28710",
+        "33190"
       ];
       this.italySeries(itData);
 
@@ -209,7 +201,8 @@ export default {
         "2353", // Situation particulière
         "2650",
         "3028",
-        "3888"
+        "4281",
+        "4840"
       ];
       this.swissSeries(swissData);
       // load chart

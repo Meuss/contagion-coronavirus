@@ -99,6 +99,12 @@ export default {
     this.chartcontagions.forEach(function(element) {
       arrayTotals.push(element.total);
     });
+    if (
+      arrayTotals[arrayTotals.length - 1] ===
+      arrayTotals[arrayTotals.length - 2]
+    ) {
+      arrayTotals.pop();
+    }
     this.series[0].data = arrayTotals;
   },
   components: {

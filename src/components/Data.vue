@@ -48,13 +48,13 @@ export default {
       totalCases: 0,
       totalDeaths: 0,
       value: 0,
-      fruits: 0,
       sliderDates: [],
       sliderDatesFromatted: [],
       maxTicks: 10,
       maxTicksMobile: 7,
       currentDate: 0,
       cantons: [
+        { name: "Switzerland", short: "CH" },
         { name: "Zurich", short: "ZH" },
         { name: "Bern", short: "BE" },
         { name: "Lucerne", short: "LU" },
@@ -96,15 +96,6 @@ export default {
     }
   },
   created() {
-    fetch(
-      "https://spreadsheets.google.com/feeds/list/1MV3AsNadM-Uuf5nh-5JBMj3UHcBhDKH7oZ6B5Rornt8/1/public/values?alt=json"
-    )
-      .then(response => {
-        return response.json();
-      })
-      .then(data => {
-        console.log(data);
-      });
     if (window.innerWidth < 601) {
       this.currentDate = this.maxTicksMobile - 1;
       this.setSliderDates(
@@ -132,25 +123,14 @@ export default {
         ].join(".");
         obj["date"] = keyString;
         let dayTotal = 0;
-        if (key === "data_0307") {
-          dayTotal = 267;
-        } else if (key === "data_0315") {
-          dayTotal = 2200;
-        } else if (key === "data_0316") {
-          dayTotal = 2353;
-        } else if (key === "data_0317") {
-          dayTotal = 2650;
-        } else if (key === "data_0318") {
-          dayTotal = 3028;
-        } else if (key === "data_0319") {
-          dayTotal = 3888;
-        } else {
+        if (val[0].Titel !== "Switzerland") {
           val.forEach(function(element) {
             dayTotal += element["Cases"];
           });
+        } else {
+          dayTotal = val[0]["Cases"];
         }
         obj["total"] = dayTotal;
-        // push dates + totals
         this.chartcontagions.push(obj);
       });
     },
@@ -161,44 +141,32 @@ export default {
       // process data from csvs, create an array of cases objects per canton
       if (this.data.days[x] !== undefined) {
         this.data.days[x].forEach(element => {
-          const obj = {};
-          obj["name"] = this.cantons.find(
-            ({ name }) => name === element.Titel
-          ).short;
-          obj["cases"] = element.Cases;
-          obj["deaths"] = element.Deaths;
-          this.contagions.push(obj);
+          if (element.Title !== "Switzerland") {
+            const obj = {};
+            obj["name"] = this.cantons.find(
+              ({ name }) => name === element.Titel
+            ).short;
+            obj["cases"] = element.Cases;
+            obj["deaths"] = element.Deaths;
+            this.contagions.push(obj);
+          }
         });
-        if (x === "data_0315") {
+        // regular
+        if (this.contagions[0].name !== "CH") {
           this.contagions.forEach(element => {
-            this.totalCases = 2217;
-            this.totalDeaths += element["deaths"];
-          });
-        } else if (x === "data_0316") {
-          this.contagions.forEach(element => {
-            this.totalCases = 2353;
-            this.totalDeaths += element["deaths"];
-          });
-        } else if (x === "data_0317") {
-          this.contagions.forEach(element => {
-            this.totalCases = 2650;
-            this.totalDeaths += element["deaths"];
-          });
-        } else if (x === "data_0318") {
-          this.contagions.forEach(element => {
-            this.totalCases = 3028;
-            this.totalDeaths += element["deaths"];
-          });
-        } else if (x === "data_0319") {
-          this.contagions.forEach(element => {
-            this.totalCases = 3888;
-            this.totalDeaths += element["deaths"];
+            if (element.name !== "CH") {
+              this.totalCases += element["cases"];
+              this.totalDeaths += element["deaths"];
+            }
           });
         } else {
+          // Overwrite total
           this.contagions.forEach(element => {
-            this.totalCases += element["cases"];
-            this.totalDeaths += element["deaths"];
+            if (element.name !== "CH") {
+              this.totalDeaths += element["deaths"];
+            }
           });
+          this.totalCases = this.contagions[0].cases;
         }
       } else {
         // unavailable: day not imported yet
