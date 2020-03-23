@@ -11,18 +11,6 @@
     <p>Day 1 Switzerland: 27.02.20<br />Day 1 Italy: 22.02.20</p>
     <Capita />
     <h2>Number of cases in Switzerland</h2>
-    <!-- <p>
-      <strong>
-        The
-        <a
-          href="https://www.bag.admin.ch/bag/de/home/krankheiten/ausbrueche-epidemien-pandemien/aktuelle-ausbrueche-epidemien/novel-cov.html"
-          target="_blank"
-          >BAG/OFSP</a
-        >
-        isn't communicating the amount of cases per cantons in Switzerland
-        anymore.
-      </strong>
-    </p> -->
     <Data />
     <footer>
       <p>
@@ -36,9 +24,7 @@
           </a>
         </li>
         <li>
-          <a href="https://interactif.tdg.ch/2020/covid-19-carte-suisse/"
-            >Tribune de Genève</a
-          >
+          <a href="https://github.com/openZH/covid_19">Open data Kt. ZH</a>
         </li>
         <li>
           <a href="https://github.com/techengines/coronavirus-stats-italy"
@@ -47,6 +33,9 @@
         </li>
         <li>
           <a href="https://www.worldometers.info/coronavirus/">Worldometer</a>
+        </li>
+        <li>
+          <a href="https://twitter.com/skepteis">@skepteis</a>
         </li>
       </ul>
       <div class="bottom">
@@ -106,7 +95,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2b2d42;
-  padding: 40px 25% 10px 25%;
+  padding: 40px 20% 10px 20%;
   @media (max-width: 1300px) {
     padding: 40px 15% 10px 15%;
   }
@@ -288,5 +277,8 @@ footer {
     .v-slider__tick-label {
     transform: translateX(-50%) !important;
   }
+}
+.chart-wrapper {
+  margin: 0 auto;
 }
 </style>
