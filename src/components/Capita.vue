@@ -49,7 +49,7 @@ export default {
                   background: "#179E87",
                   fontWeight: 700
                 },
-                text: "Italy quarantine 09.03"
+                text: "Italy quarantine => 09.03"
               }
             },
             {
@@ -62,7 +62,33 @@ export default {
                   background: "#ef233c",
                   fontWeight: 700
                 },
-                text: "CH 16.03"
+                text: "Extraordinary situation => 16.03"
+              }
+            },
+            {
+              x: 23,
+              borderColor: "#ef233c",
+              label: {
+                borderColor: "#ef233c",
+                style: {
+                  color: "#fff",
+                  background: "#ef233c",
+                  fontWeight: 700
+                },
+                text: "=> 20.03"
+              }
+            },
+            {
+              x: 4,
+              borderColor: "#ef233c",
+              label: {
+                borderColor: "#ef233c",
+                style: {
+                  color: "#fff",
+                  background: "#ef233c",
+                  fontWeight: 700
+                },
+                text: "=> 01.03"
               }
             }
           ]
@@ -171,7 +197,11 @@ export default {
         "23073", // 16.03
         "26062",
         "28710",
-        "33190"
+        "33190",
+        "37860",
+        "42681",
+        "53578",
+        "59138"
       ];
       this.italySeries(itData);
 
@@ -202,7 +232,10 @@ export default {
         "2650",
         "3028",
         "4281",
-        "4840"
+        "5702",
+        "6828",
+        "7661",
+        "8260"
       ];
       this.swissSeries(swissData);
       // load chart
@@ -227,7 +260,7 @@ export default {
         this.perMillion(e, this.population.Switzerland)
       );
       const filteredMapCH = mapCH.filter(e => e > 0.91);
-      filteredMapCH.push(null, null, null, null); // to have the same length of Italy, so that tooltip shows both numbers
+      filteredMapCH.push(null, null, null, null, null); // to have the same length of Italy, so that tooltip shows both numbers
       this.createSeries(filteredMapCH, 0);
     },
     createSeries(data, index) {
@@ -245,10 +278,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-.chart-wrapper {
-  max-width: 700px;
-  margin: 0 auto;
-}
-</style>

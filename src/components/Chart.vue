@@ -14,6 +14,7 @@ export default {
         chart: {
           id: "total-cases",
           fontFamily: "Avenir, Helvetica, Arial, sans-serif",
+          background: "#fff",
           toolbar: {
             show: false
           },
@@ -112,10 +113,3 @@ export default {
   }
 };
 </script>
-
-<style lang="scss" scoped>
-.chart-wrapper {
-  max-width: 700px;
-  margin: 0 auto;
-}
-</style>
