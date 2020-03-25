@@ -239,7 +239,7 @@ export default {
         "7661",
         "8772",
         "9896",
-        "10247"
+        "10458"
       ];
       this.swissSeries(swissData);
       // load chart
