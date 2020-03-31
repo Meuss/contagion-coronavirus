@@ -410,14 +410,10 @@ export default {
             c = 12;
           } else if (x > 10 && x <= 19) {
             c = 17;
-          } else if (x > 10 && x <= 19) {
-            c = 20;
           } else if (x > 19 && x <= 25) {
+            c = 20;
+          } else if (x > 25) {
             c = 25;
-          } else if (x > 25 && x <= 30) {
-            c = 30;
-          } else if (x > 30) {
-            c = 35;
           }
           circle.r.baseVal.value = c;
           pulse.r.baseVal.value = c;
@@ -460,10 +456,10 @@ export default {
             "http://www.w3.org/2000/svg",
             "image"
           );
-          deathImg.setAttribute("x", circle.cx.baseVal.value - 12.5);
-          deathImg.setAttribute("y", circle.cy.baseVal.value - 12.5);
-          deathImg.setAttribute("width", "25");
-          deathImg.setAttribute("height", "25");
+          deathImg.setAttribute("x", circle.cx.baseVal.value - 10);
+          deathImg.setAttribute("y", circle.cy.baseVal.value - 10);
+          deathImg.setAttribute("width", "20");
+          deathImg.setAttribute("height", "20");
           deathImg.setAttribute("href", "skull.png");
           deathImg.setAttribute("class", "skull");
           document.querySelector("#swiss_map").appendChild(deathImg);
