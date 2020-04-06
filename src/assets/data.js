@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import data_0225 from "./data/0225.csv";
 import data_0226 from "./data/0226.csv";
 import data_0227 from "./data/0227.csv";
@@ -37,6 +38,8 @@ import data_0331 from "./data/0331.csv";
 import data_0401 from "./data/0401.csv";
 import data_0402 from "./data/0402.csv";
 import data_0403 from "./data/0403.csv";
+import data_0404 from "./data/0404.csv";
+import data_0405 from "./data/0405.csv";
 
 export default {
   days: {
@@ -78,6 +81,8 @@ export default {
     data_0331,
     data_0401,
     data_0402,
-    data_0403
-  }
+    data_0403,
+    data_0404,
+    data_0405,
+  },
 };
