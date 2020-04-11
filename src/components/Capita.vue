@@ -217,7 +217,9 @@ export default {
         "128948",
         "132547",
         "135586",
-        "139422"
+        "139422",
+        "143626",
+        "147577"
       ];
       this.italySeries(itData);
 
@@ -268,7 +270,8 @@ export default {
         "21637",
         "22293",
         "23280",
-        "23798"
+        "23798",
+        "24549"
       ];
       this.swissSeries(swissData);
       // load chart
@@ -293,7 +296,7 @@ export default {
         this.perMillion(e, this.population.Switzerland)
       );
       const filteredMapCH = mapCH.filter(e => e > 0.91);
-      filteredMapCH.push(null, null, null, null); // to have the same length of Italy, so that tooltip shows both numbers
+      filteredMapCH.push(null, null, null, null, null); // to have the same length of Italy, so that tooltip shows both numbers
       this.createSeries(filteredMapCH, 0);
     },
     createSeries(data, index) {
