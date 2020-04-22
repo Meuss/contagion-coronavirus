@@ -39,19 +39,19 @@ export default {
         annotations: {
           position: "back",
           xaxis: [
-            {
-              x: 17,
-              borderColor: "#179E87",
-              label: {
-                borderColor: "#179E87",
-                style: {
-                  color: "#fff",
-                  background: "#179E87",
-                  fontWeight: 700
-                },
-                text: "Italy quarantine => 09.03"
-              }
-            },
+            // {
+            //   x: 17,
+            //   borderColor: "#179E87",
+            //   label: {
+            //     borderColor: "#179E87",
+            //     style: {
+            //       color: "#fff",
+            //       background: "#179E87",
+            //       fontWeight: 700
+            //     },
+            //     text: "Italy quarantine => 09.03"
+            //   }
+            // },
             {
               x: 19,
               borderColor: "#ef233c",
@@ -62,11 +62,11 @@ export default {
                   background: "#ef233c",
                   fontWeight: 700
                 },
-                text: "Extraordinary situation => 16.03"
+                text: "CH lockdown 16.03"
               }
             },
             {
-              x: 23,
+              x: 35,
               borderColor: "#ef233c",
               label: {
                 borderColor: "#ef233c",
@@ -75,7 +75,7 @@ export default {
                   background: "#ef233c",
                   fontWeight: 700
                 },
-                text: "=> 20.03"
+                text: "01.04"
               }
             },
             {
@@ -88,7 +88,7 @@ export default {
                   background: "#ef233c",
                   fontWeight: 700
                 },
-                text: "=> 01.03"
+                text: "01.03"
               }
             }
           ]
@@ -219,7 +219,7 @@ export default {
         "135586",
         "139422",
         "143626",
-        "147577",
+        "147577", // 10.04
         "152271",
         "156363",
         "159516",
@@ -228,7 +228,9 @@ export default {
         "168941",
         "172434",
         "175925",
-        "178972"
+        "178972",
+        "181228", // 20.04
+        "183957"
       ];
       this.italySeries(itData);
 
@@ -289,7 +291,9 @@ export default {
         "26588",
         "27033",
         "27333",
-        "27469"
+        "27469",
+        "27724", // 20.04
+        "27815"
       ];
       this.swissSeries(swissData);
       // load chart

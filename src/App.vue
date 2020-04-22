@@ -18,24 +18,12 @@
       </p>
       <ul>
         <li>
-          <a
-            href="https://www.bag.admin.ch/bag/de/home/krankheiten/ausbrueche-epidemien-pandemien/aktuelle-ausbrueche-epidemien/novel-cov.html"
-            >BAG/OFSP
-          </a>
+          <a href="https://github.com/openZH/covid_19">CH: OpenZH covid_19</a>
         </li>
         <li>
-          <a href="https://github.com/openZH/covid_19">Open data Kt. ZH</a>
-        </li>
-        <li>
-          <a href="https://github.com/techengines/coronavirus-stats-italy"
-            >TechEngines.AI</a
+          <a href="https://www.worldometers.info/coronavirus/"
+            >IT: Worldometer</a
           >
-        </li>
-        <li>
-          <a href="https://www.worldometers.info/coronavirus/">Worldometer</a>
-        </li>
-        <li>
-          <a href="https://twitter.com/skepteis">@skepteis</a>
         </li>
       </ul>
       <div class="bottom">
