@@ -6,7 +6,9 @@
       This graph compares the amount of
       <strong>cases per million inhabitants</strong>.<br />
       It starts on the first day when there was more than 1 in 1'000'000
-      inhabitants that was infected.
+      inhabitants that was infected.<br />
+      It does not take in account the number of cured cases or deaths, just the
+      total amounts of confirmed cases per million inhabitants.
     </p>
     <p>Day 1 Switzerland: 27.02.20<br />Day 1 Italy: 22.02.20</p>
     <Capita />
