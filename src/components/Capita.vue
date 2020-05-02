@@ -239,7 +239,8 @@ export default {
         "199414",
         "201505",
         "203591",
-        "205463"
+        "205463",
+        "207428"
       ];
       this.italySeries(itData);
 
@@ -311,7 +312,8 @@ export default {
         "28904",
         "29010",
         "29144",
-        "29318"
+        "29318",
+        "29536"
       ];
       this.swissSeries(swissData);
       // load chart
