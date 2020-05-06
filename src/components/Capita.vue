@@ -37,7 +37,7 @@ export default {
           }
         },
         annotations: {
-          position: "back",
+          position: "front",
           xaxis: [
             // {
             //   x: 17,
@@ -63,6 +63,19 @@ export default {
                   fontWeight: 700
                 },
                 text: "CH lockdown 16.03"
+              }
+            },
+            {
+              x: 65,
+              borderColor: "#ef233c",
+              label: {
+                borderColor: "#ef233c",
+                style: {
+                  color: "#fff",
+                  background: "#ef233c",
+                  fontWeight: 700
+                },
+                text: "01.05"
               }
             },
             {
