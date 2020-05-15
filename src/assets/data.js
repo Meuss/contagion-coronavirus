@@ -78,6 +78,7 @@ import data_0510 from "./data/0510.csv";
 import data_0511 from "./data/0511.csv";
 import data_0512 from "./data/0512.csv";
 import data_0513 from "./data/0513.csv";
+import data_0514 from "./data/0514.csv";
 
 export default {
   days: {
@@ -160,5 +161,6 @@ export default {
     data_0511,
     data_0512,
     data_0513,
+    data_0514,
   },
 };
