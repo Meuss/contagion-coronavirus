@@ -100,12 +100,16 @@ export default {
       this.currentDate = this.maxTicksMobile - 1;
       this.setSliderDates(
         new Date(2020, 1, 25),
-        new Date(),
+        new Date(2020, 4, 18),
         this.maxTicksMobile
       );
     } else {
       this.currentDate = this.maxTicks - 1;
-      this.setSliderDates(new Date(2020, 1, 25), new Date(), this.maxTicks);
+      this.setSliderDates(
+        new Date(2020, 1, 25),
+        new Date(2020, 4, 18),
+        this.maxTicks
+      );
     }
     const todayDate = moment(new Date()).format("MMDD");
     this.loadData(`data_${todayDate}`);

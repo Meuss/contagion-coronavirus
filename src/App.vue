@@ -1,6 +1,7 @@
 <template>
   <v-app id="app">
     <h1>Contagion of the coronavirus in Switzerland</h1>
+    <h1 class="red--text">18.05.2020 - Project no longer updated.</h1>
     <h2>Comparing the situation with Italy</h2>
     <p>
       This graph compares the amount of
