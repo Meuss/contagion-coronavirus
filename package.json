@@ -13,7 +13,7 @@
     "core-js": "^3.6.4",
     "csv-loader": "^3.0.2",
     "moment": "^2.24.0",
-    "papaparse": "^5.1.1",
+    "papaparse": "^5.2.0",
     "roboto-fontface": "*",
     "v-tooltip": "^2.0.3",
     "vue": "^2.6.11",
