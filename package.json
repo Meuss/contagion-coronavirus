@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@mdi/font": "^3.6.95",
-    "apexcharts": "^3.16.0",
+    "apexcharts": "^3.24.0",
     "core-js": "^3.6.4",
     "csv-loader": "^3.0.2",
     "moment": "^2.24.0",
